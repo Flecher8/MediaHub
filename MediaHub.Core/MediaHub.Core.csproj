@@ -16,7 +16,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="DbModels\" />
+    <Folder Include="Services\Abstract\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MediaHub.Models\MediaHub.Models.csproj" />
   </ItemGroup>
 
 </Project>
