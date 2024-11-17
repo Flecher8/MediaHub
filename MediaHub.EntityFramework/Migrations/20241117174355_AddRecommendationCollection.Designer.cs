@@ -4,6 +4,7 @@ using MediaHub.EntityFramewok;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaHub.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20241117174355_AddRecommendationCollection")]
+    partial class AddRecommendationCollection
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -21,24 +24,6 @@ namespace MediaHub.DAL.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
-
-            modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("Name")
-                        .IsUnique();
-
-                    b.ToTable("CollectionUserRoles");
-                });
 
             modelBuilder.Entity("MediaHub.Models.RecommendationCollection", b =>
                 {
@@ -54,34 +39,6 @@ namespace MediaHub.DAL.Migrations
                     b.HasIndex("CreatorId");
 
                     b.ToTable("RecommendationCollections");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollectionUserAccess", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("CollectionUserRoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("RecommendationCollectionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CollectionUserRoleId");
-
-                    b.HasIndex("RecommendationCollectionId");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("RecommendationCollectionUserAccesses");
                 });
 
             modelBuilder.Entity("MediaHub.Models.Role", b =>
@@ -293,33 +250,6 @@ namespace MediaHub.DAL.Migrations
                     b.Navigation("Creator");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollectionUserAccess", b =>
-                {
-                    b.HasOne("MediaHub.Models.CollectionUserRole", "CollectionUserRole")
-                        .WithMany("RecommendationCollectionUserAccesses")
-                        .HasForeignKey("CollectionUserRoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
-                        .WithMany()
-                        .HasForeignKey("RecommendationCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.User", "User")
-                        .WithMany("RecommendationCollectionUserAccess")
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("CollectionUserRole");
-
-                    b.Navigation("RecommendationCollection");
-
-                    b.Navigation("User");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("MediaHub.Models.Role", null)
@@ -371,15 +301,8 @@ namespace MediaHub.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
-                {
-                    b.Navigation("RecommendationCollectionUserAccesses");
-                });
-
             modelBuilder.Entity("MediaHub.Models.User", b =>
                 {
-                    b.Navigation("RecommendationCollectionUserAccess");
-
                     b.Navigation("RecommendationCollections");
                 });
 #pragma warning restore 612, 618
