@@ -5,6 +5,7 @@ using MediaHub.EntityFramewok;
 using MediaHub.Models;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
+using MediaHub.EntityFramewok.Abstract;
 
 namespace MediaHub.API
 {
@@ -15,6 +16,7 @@ namespace MediaHub.API
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped(typeof(BaseFilterBuilder<>));
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
