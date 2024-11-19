@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class GenreRepository : BaseFilterableRepository<Genre>, IGenreRepository
 {
     // Constructor accepting the database context.
-    public GenreRepository(DataContext dbContext) : base(dbContext) { }
+    public GenreRepository(DataContext dbContext, BaseFilterBuilder<Genre> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

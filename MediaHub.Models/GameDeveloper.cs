@@ -9,5 +9,6 @@ public class GameDeveloper
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<GameDeveloperGame> GameDeveloperGames { get; set; } = new List<GameDeveloperGame>();
+
+    public List<Game> Games { get; set; } = new List<Game>();
 }

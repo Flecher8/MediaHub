@@ -13,10 +13,6 @@ public abstract class BaseFilterableRepository<T> : BaseRepository<T>, IFilterab
     // An instance of the generic filter builder.
     protected readonly BaseFilterBuilder<T> _filterBuilder;
 
-    public BaseFilterableRepository(DataContext dbContext) : base(dbContext)
-    {
-    }
-
     // Constructor accepting the database context and initializing the filter builder.
     public BaseFilterableRepository(DataContext dbContext, BaseFilterBuilder<T> filterBuilder) : base(dbContext)
     {

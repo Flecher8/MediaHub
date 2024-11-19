@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class ContentStatusRepository : BaseFilterableRepository<ContentStatus>, IContentStatusRepository
 {
     // Constructor accepting the database context.
-    public ContentStatusRepository(DataContext dbContext) : base(dbContext) { }
+    public ContentStatusRepository(DataContext dbContext, BaseFilterBuilder<ContentStatus> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

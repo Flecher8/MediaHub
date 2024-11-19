@@ -9,5 +9,6 @@ public class GamePlatform
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<GamePlatformGame> GamePlatformGames { get; set; } = new List<GamePlatformGame>();
+
+    public List<Game> Games { get; set; } = new List<Game>();
 }

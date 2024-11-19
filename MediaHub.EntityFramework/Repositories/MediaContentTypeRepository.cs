@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class MediaContentTypeRepository : BaseFilterableRepository<MediaContentType>, IMediaContentTypeRepository
 {
     // Constructor accepting the database context.
-    public MediaContentTypeRepository(DataContext dbContext) : base(dbContext) { }
+    public MediaContentTypeRepository(DataContext dbContext, BaseFilterBuilder<MediaContentType> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

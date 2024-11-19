@@ -18,7 +18,6 @@ namespace MediaHub.EntityFramewok
         public DbSet<Genre> Genres { get; set; }
         public DbSet<GenreEvaluation> GenreEvaluations { get; set; }
         public DbSet<MediaContent> MediaContents { get; set; }
-        public DbSet<MediaContentGenre> MediaContentGenres { get; set; }
         public DbSet<MediaContentPicture> MediaContentPictures { get; set; }
         public DbSet<MediaContentType> MediaContentTypes { get; set; }
         public DbSet<MediaInteractionStatus> MediaInteractionStatuses { get; set; }
@@ -27,25 +26,17 @@ namespace MediaHub.EntityFramewok
         public DbSet<Film> Films { get; set; }
         public DbSet<Serial> Serials { get; set; }
         public DbSet<MovieInfo> MovieInfos { get; set; }
-        public DbSet<DirectorMovieInfo> DirectorMovieInfos { get; set; }
         public DbSet<Director> Directors { get; set; }
-        public DbSet<ActorMovieInfo> ActorMovieInfos { get; set; }
         public DbSet<Actor> Actors { get; set; }
         public DbSet<Game> Games { get; set; }
         public DbSet<GamePlatform> GamePlatforms { get; set; }
-        public DbSet<GamePlatformGame> GamePlatformGames { get; set; }
         public DbSet<GameDeveloper> GameDevelopers { get; set; }
-        public DbSet<GameDeveloperGame> GameDeveloperGames { get; set; }
         public DbSet<GamePublisher> GamePublishers { get; set; }
-        public DbSet<GamePublisherGame> GamePublisherGames { get; set; }
         public DbSet<GameTag> GameTags { get; set; }
-        public DbSet<GameTagGame> GameTagGames { get; set; }
         public DbSet<Anime> Animes { get; set; }
         public DbSet<AnimeStudio> AnimeStudios { get; set; }
-        public DbSet<AnimeStudioAnime> AnimeStudioAnimes { get; set; }
         public DbSet<Manga> Mangas { get; set; }
         public DbSet<MangaAuthor> MangaAuthors { get; set; }
-        public DbSet<MangaAuthorManga> MangaAuthorMangas { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -130,12 +121,6 @@ namespace MediaHub.EntityFramewok
                       .HasForeignKey(ge => ge.GenreId)
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasMany(g => g.MediaContentGenres)
-                      .WithOne(mcg => mcg.Genre)
-                      .HasForeignKey(mcg => mcg.GenreId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
 
 
@@ -178,12 +163,6 @@ namespace MediaHub.EntityFramewok
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasMany(mc => mc.MediaContentGenres)
-                      .WithOne(mcg => mcg.MediaContent)
-                      .HasForeignKey(mcg => mcg.MediaContentId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
                 entity.HasMany(mc => mc.MediaContentPictures)
                       .WithOne(mcp => mcp.MediaContent)
                       .HasForeignKey(mcp => mcp.MediaContentId)
@@ -220,22 +199,19 @@ namespace MediaHub.EntityFramewok
                       .HasForeignKey<Manga>(m => m.MediaContentId)
                       .OnDelete(DeleteBehavior.Cascade);
 
-            });
-
-            // Configure MediaContentGenre entity
-            modelBuilder.Entity<MediaContentGenre>(entity =>
-            {
-                entity.HasKey(mcg => mcg.Id);
-                entity.HasOne(mcg => mcg.MediaContent)
-                      .WithMany(mc => mc.MediaContentGenres)
-                      .HasForeignKey(mcg => mcg.MediaContentId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-                entity.HasOne(mcg => mcg.Genre)
-                      .WithMany(g => g.MediaContentGenres)
-                      .HasForeignKey(mcg => mcg.GenreId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(mc => mc.Genres)
+                          .WithMany(g => g.MediaContents)
+                          .UsingEntity<Dictionary<string, object>>(
+                              "MediaContentGenre",
+                              join => join.HasOne<Genre>()
+                                          .WithMany()
+                                          .HasForeignKey("GenreId")
+                                          .OnDelete(DeleteBehavior.Cascade),
+                              join => join.HasOne<MediaContent>()
+                                          .WithMany()
+                                          .HasForeignKey("MediaContentId")
+                                          .OnDelete(DeleteBehavior.Cascade)
+                          );
             });
 
             // Configure MediaContentPicture entity
@@ -425,26 +401,35 @@ namespace MediaHub.EntityFramewok
                       .WithOne(s => s.MovieInfo)
                       .HasForeignKey<Serial>(s => s.MovieInfoId)
                       .OnDelete(DeleteBehavior.Cascade);
+
+                entity.HasMany(mi => mi.Directors)
+                     .WithMany(d => d.MovieInfos)
+                     .UsingEntity<Dictionary<string, object>>(
+                         "DirectorMovieInfo", // Name of the join table
+                         join => join.HasOne<Director>()
+                                     .WithMany()
+                                     .HasForeignKey("DirectorId")
+                                     .OnDelete(DeleteBehavior.Cascade),
+                         join => join.HasOne<MovieInfo>()
+                                     .WithMany()
+                                     .HasForeignKey("MovieInfoId")
+                                     .OnDelete(DeleteBehavior.Cascade)
+                     );
+
+                entity.HasMany(mi => mi.Actors)
+                      .WithMany(a => a.MovieInfos)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "ActorMovieInfo", // Name of the join table
+                          join => join.HasOne<Actor>()
+                                      .WithMany()
+                                      .HasForeignKey("ActorId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<MovieInfo>()
+                                      .WithMany()
+                                      .HasForeignKey("MovieInfoId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                      );
             });
-
-            // Configure DirectorMovieInfo entity
-            modelBuilder.Entity<DirectorMovieInfo>(entity =>
-            {
-                entity.HasKey(dmi => dmi.Id);
-
-                entity.HasOne(dmi => dmi.MovieInfo)
-                      .WithMany(mi => mi.DirectorMovieInfos)
-                      .HasForeignKey(dmi => dmi.MovieInfoId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(dmi => dmi.Director)
-                      .WithMany(d => d.DirectorMovieInfos)
-                      .HasForeignKey(dmi => dmi.DirectorId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
 
             // Configure Director entity
             modelBuilder.Entity<Director>(entity =>
@@ -454,31 +439,6 @@ namespace MediaHub.EntityFramewok
                 entity.Property(d => d.Name)
                       .IsRequired()
                       .HasMaxLength(100);
-
-                entity.HasMany(d => d.DirectorMovieInfos)
-                      .WithOne(dmi => dmi.Director)
-                      .HasForeignKey(dmi => dmi.DirectorId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-
-            // Configure ActorMovieInfo entity
-            modelBuilder.Entity<ActorMovieInfo>(entity =>
-            {
-                entity.HasKey(ami => ami.Id);
-
-                entity.HasOne(ami => ami.MovieInfo)
-                      .WithMany(mi => mi.ActorMovieInfos)
-                      .HasForeignKey(ami => ami.MovieInfoId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(ami => ami.Actor)
-                      .WithMany(a => a.ActorMovieInfos)
-                      .HasForeignKey(ami => ami.ActorId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
 
 
@@ -490,14 +450,7 @@ namespace MediaHub.EntityFramewok
                 entity.Property(a => a.Name)
                       .IsRequired()
                       .HasMaxLength(100);
-
-                entity.HasMany(a => a.ActorMovieInfos)
-                      .WithOne(ami => ami.Actor)
-                      .HasForeignKey(ami => ami.ActorId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
-
 
             // Configure Game entity
             modelBuilder.Entity<Game>(entity =>
@@ -516,29 +469,61 @@ namespace MediaHub.EntityFramewok
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasMany(g => g.GamePlatformGames)
-                      .WithOne(gpg => gpg.Game)
-                      .HasForeignKey(gpg => gpg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(g => g.GamePlatforms)
+                      .WithMany(gp => gp.Games)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "GamePlatformGame", // Name of the join table
+                          join => join.HasOne<GamePlatform>()
+                                      .WithMany()
+                                      .HasForeignKey("GamePlatformId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<Game>()
+                                      .WithMany()
+                                      .HasForeignKey("GameId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                       );
 
-                entity.HasMany(g => g.GameDeveloperGames)
-                      .WithOne(gdg => gdg.Game)
-                      .HasForeignKey(gdg => gdg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(g => g.GameDevelopers)
+                      .WithMany(gd => gd.Games)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "GameDeveloperGame", // Join table name
+                          join => join.HasOne<GameDeveloper>()
+                                      .WithMany()
+                                      .HasForeignKey("GameDeveloperId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<Game>()
+                                      .WithMany()
+                                      .HasForeignKey("GameId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                        );
 
-                entity.HasMany(g => g.GamePublisherGames)
-                      .WithOne(gpg => gpg.Game)
-                      .HasForeignKey(gpg => gpg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(g => g.GamePublishers)
+                      .WithMany(gp => gp.Games)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "GamePublisherGame",
+                          join => join.HasOne<GamePublisher>()
+                                      .WithMany()
+                                      .HasForeignKey("GamePublisherId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<Game>()
+                                      .WithMany()
+                                      .HasForeignKey("GameId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                    );
 
-                entity.HasMany(g => g.GameTagGames)
-                      .WithOne(gtg => gtg.Game)
-                      .HasForeignKey(gtg => gtg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(g => g.GameTags)
+                      .WithMany(gt => gt.Games)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "GameTagGame",
+                          join => join.HasOne<GameTag>()
+                                      .WithMany()
+                                      .HasForeignKey("GameTagId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<Game>()
+                                      .WithMany()
+                                      .HasForeignKey("GameId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                    );
             });
 
             // Configure GamePlatform entity
@@ -549,32 +534,7 @@ namespace MediaHub.EntityFramewok
                 entity.Property(gp => gp.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(gp => gp.Name).IsUnique();
-
-                entity.HasMany(gp => gp.GamePlatformGames)
-                      .WithOne(gpg => gpg.GamePlatform)
-                      .HasForeignKey(gpg => gpg.GamePlatformId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
-
-            // Configure GamePlatformGame entity (many-to-many)
-            modelBuilder.Entity<GamePlatformGame>(entity =>
-            {
-                entity.HasKey(gpg => gpg.Id);
-
-                entity.HasOne(gpg => gpg.Game)
-                      .WithMany(g => g.GamePlatformGames)
-                      .HasForeignKey(gpg => gpg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(gpg => gpg.GamePlatform)
-                      .WithMany(gp => gp.GamePlatformGames)
-                      .HasForeignKey(gpg => gpg.GamePlatformId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
 
             // Configure GameDeveloper entity
             modelBuilder.Entity<GameDeveloper>(entity =>
@@ -584,32 +544,7 @@ namespace MediaHub.EntityFramewok
                 entity.Property(gd => gd.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(gd => gd.Name).IsUnique();
-
-                entity.HasMany(gd => gd.GameDeveloperGames)
-                      .WithOne(gdg => gdg.GameDeveloper)
-                      .HasForeignKey(gdg => gdg.GameDeveloperId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
-
-            // Configure GameDeveloperGame entity (many-to-many)
-            modelBuilder.Entity<GameDeveloperGame>(entity =>
-            {
-                entity.HasKey(gdg => gdg.Id);
-
-                entity.HasOne(gdg => gdg.Game)
-                      .WithMany(g => g.GameDeveloperGames)
-                      .HasForeignKey(gdg => gdg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(gdg => gdg.GameDeveloper)
-                      .WithMany(gd => gd.GameDeveloperGames)
-                      .HasForeignKey(gdg => gdg.GameDeveloperId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
 
             // Configure GamePublisher entity
             modelBuilder.Entity<GamePublisher>(entity =>
@@ -619,30 +554,6 @@ namespace MediaHub.EntityFramewok
                 entity.Property(gp => gp.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(gp => gp.Name).IsUnique();
-
-                entity.HasMany(gp => gp.GamePublisherGames)
-                      .WithOne(gpg => gpg.GamePublisher)
-                      .HasForeignKey(gpg => gpg.GamePublisherId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            // Configure GamePublisherGame entity (many-to-many)
-            modelBuilder.Entity<GamePublisherGame>(entity =>
-            {
-                entity.HasKey(gpg => gpg.Id);
-
-                entity.HasOne(gpg => gpg.Game)
-                      .WithMany(g => g.GamePublisherGames)
-                      .HasForeignKey(gpg => gpg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(gpg => gpg.GamePublisher)
-                      .WithMany(gp => gp.GamePublisherGames)
-                      .HasForeignKey(gpg => gpg.GamePublisherId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
 
 
@@ -654,32 +565,7 @@ namespace MediaHub.EntityFramewok
                 entity.Property(gt => gt.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(gt => gt.Name).IsUnique();
-
-                entity.HasMany(gt => gt.GameTagGames)
-                      .WithOne(gtg => gtg.GameTag)
-                      .HasForeignKey(gtg => gtg.GameTagId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
-
-            // Configure GameTagGame entity (many-to-many)
-            modelBuilder.Entity<GameTagGame>(entity =>
-            {
-                entity.HasKey(gtg => gtg.Id);
-
-                entity.HasOne(gtg => gtg.Game)
-                      .WithMany(g => g.GameTagGames)
-                      .HasForeignKey(gtg => gtg.GameId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(gtg => gtg.GameTag)
-                      .WithMany(gt => gt.GameTagGames)
-                      .HasForeignKey(gtg => gtg.GameTagId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
 
             // Configure Anime entity
             modelBuilder.Entity<Anime>(entity =>
@@ -704,11 +590,19 @@ namespace MediaHub.EntityFramewok
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasMany(a => a.AnimeStudioAnimes)
-                      .WithOne(asa => asa.Anime)
-                      .HasForeignKey(asa => asa.AnimeId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(a => a.AnimeStudios)
+                      .WithMany(studio => studio.Animes)
+                      .UsingEntity<Dictionary<string, object>>(
+                          "AnimeStudioAnime",
+                          join => join.HasOne<AnimeStudio>()
+                                      .WithMany()
+                                      .HasForeignKey("AnimeStudioId")
+                                      .OnDelete(DeleteBehavior.Cascade),
+                          join => join.HasOne<Anime>()
+                                      .WithMany()
+                                      .HasForeignKey("AnimeId")
+                                      .OnDelete(DeleteBehavior.Cascade)
+                      );
             });
 
 
@@ -720,31 +614,7 @@ namespace MediaHub.EntityFramewok
                 entity.Property(studio => studio.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(studio => studio.Name).IsUnique();
-
-                entity.HasMany(studio => studio.AnimeStudiosAnimes)
-                      .WithOne(asa => asa.AnimeStudio)
-                      .HasForeignKey(asa => asa.AnimeStudioId)
-                      .OnDelete(DeleteBehavior.Cascade);
             });
-
-            // Configure AnimeStudioAnime (many-to-many join table)
-            modelBuilder.Entity<AnimeStudioAnime>(entity =>
-            {
-                entity.HasKey(asa => asa.Id);
-
-                entity.HasOne(asa => asa.Anime)
-                      .WithMany(a => a.AnimeStudioAnimes)
-                      .HasForeignKey(asa => asa.AnimeId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(asa => asa.AnimeStudio)
-                      .WithMany(studio => studio.AnimeStudiosAnimes)
-                      .HasForeignKey(asa => asa.AnimeStudioId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
 
             // Configure Manga entity
             modelBuilder.Entity<Manga>(entity =>
@@ -772,13 +642,20 @@ namespace MediaHub.EntityFramewok
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
 
-                entity.HasMany(m => m.MangaAuthorMangas)
-                      .WithOne(mam => mam.Manga)
-                      .HasForeignKey(mam => mam.MangaId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                entity.HasMany(m => m.MangaAuthors)
+                          .WithMany(ma => ma.Mangas)
+                          .UsingEntity<Dictionary<string, object>>(
+                              "MangaAuthorManga", // Name of the join table
+                              join => join.HasOne<MangaAuthor>()
+                                          .WithMany()
+                                          .HasForeignKey("MangaAuthorId")
+                                          .OnDelete(DeleteBehavior.Cascade),
+                              join => join.HasOne<Manga>()
+                                          .WithMany()
+                                          .HasForeignKey("MangaId")
+                                          .OnDelete(DeleteBehavior.Cascade)
+                          );
             });
-
 
             // Configure MangaAuthor entity
             modelBuilder.Entity<MangaAuthor>(entity =>
@@ -787,29 +664,6 @@ namespace MediaHub.EntityFramewok
                 entity.Property(ma => ma.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(ma => ma.Name).IsUnique();
-
-                entity.HasMany(ma => ma.MangaAuthorMangas)
-                      .WithOne(mam => mam.MangaAuthor)
-                      .HasForeignKey(mam => mam.MangaAuthorId)
-                      .OnDelete(DeleteBehavior.Cascade);
-            });
-
-            // Configure MangaAuthorManga (many-to-many join table)
-            modelBuilder.Entity<MangaAuthorManga>(entity =>
-            {
-                entity.HasKey(mam => mam.Id);
-
-                entity.HasOne(mam => mam.Manga)
-                      .WithMany(m => m.MangaAuthorMangas)
-                      .HasForeignKey(mam => mam.MangaId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
-
-                entity.HasOne(mam => mam.MangaAuthor)
-                      .WithMany(ma => ma.MangaAuthorMangas)
-                      .HasForeignKey(mam => mam.MangaAuthorId)
-                      .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
             });
 
         }

@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class RoleRepository : BaseFilterableRepository<Role>, IRoleRepository
 {
     // Constructor accepting the database context.
-    public RoleRepository(DataContext dbContext) : base(dbContext) { }
+    public RoleRepository(DataContext dbContext, BaseFilterBuilder<Role> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

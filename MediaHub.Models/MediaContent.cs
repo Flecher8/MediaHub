@@ -14,7 +14,6 @@ public class MediaContent
     public DateTime ReleaseDate { get; set; }
     public string? MainPictureLink { get; set; }
     public List<MediaInteractionStatus> MediaInteractionStatuses { get; set; } = new List<MediaInteractionStatus>();
-    public List<MediaContentGenre> MediaContentGenres { get; set; } = new List<MediaContentGenre>();
     public List<MediaContentPicture> MediaContentPictures { get; set; } = new List<MediaContentPicture>();
 
     public required string MediaContentTypeId { get; set; }
@@ -25,4 +24,6 @@ public class MediaContent
     public Game? Game { get; set; }
     public Anime? Anime { get; set; }
     public Manga? Manga { get; set; }
+
+    public List<Genre> Genres { get; set; } = new List<Genre>();
 }

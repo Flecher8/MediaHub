@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace MediaHub.DAL.Migrations
 {
     /// <inheritdoc />
-    public partial class MediaModelTables : Migration
+    public partial class AddedMediaModelTables : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -221,24 +221,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ActorMovieInfos",
+                name: "ActorMovieInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MovieInfoId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    ActorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    ActorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MovieInfoId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ActorMovieInfos", x => x.Id);
+                    table.PrimaryKey("PK_ActorMovieInfo", x => new { x.ActorId, x.MovieInfoId });
                     table.ForeignKey(
-                        name: "FK_ActorMovieInfos_Actors_ActorId",
+                        name: "FK_ActorMovieInfo_Actors_ActorId",
                         column: x => x.ActorId,
                         principalTable: "Actors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ActorMovieInfos_MovieInfos_MovieInfoId",
+                        name: "FK_ActorMovieInfo_MovieInfos_MovieInfoId",
                         column: x => x.MovieInfoId,
                         principalTable: "MovieInfos",
                         principalColumn: "Id",
@@ -246,24 +245,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "DirectorMovieInfos",
+                name: "DirectorMovieInfo",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MovieInfoId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    DirectorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    DirectorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MovieInfoId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DirectorMovieInfos", x => x.Id);
+                    table.PrimaryKey("PK_DirectorMovieInfo", x => new { x.DirectorId, x.MovieInfoId });
                     table.ForeignKey(
-                        name: "FK_DirectorMovieInfos_Directors_DirectorId",
+                        name: "FK_DirectorMovieInfo_Directors_DirectorId",
                         column: x => x.DirectorId,
                         principalTable: "Directors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_DirectorMovieInfos_MovieInfos_MovieInfoId",
+                        name: "FK_DirectorMovieInfo_MovieInfos_MovieInfoId",
                         column: x => x.MovieInfoId,
                         principalTable: "MovieInfos",
                         principalColumn: "Id",
@@ -362,24 +360,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MediaContentGenres",
+                name: "MediaContentGenre",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MediaContentId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GenreId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    GenreId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MediaContentId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MediaContentGenres", x => x.Id);
+                    table.PrimaryKey("PK_MediaContentGenre", x => new { x.GenreId, x.MediaContentId });
                     table.ForeignKey(
-                        name: "FK_MediaContentGenres_Genres_GenreId",
+                        name: "FK_MediaContentGenre_Genres_GenreId",
                         column: x => x.GenreId,
                         principalTable: "Genres",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MediaContentGenres_MediaContents_MediaContentId",
+                        name: "FK_MediaContentGenre_MediaContents_MediaContentId",
                         column: x => x.MediaContentId,
                         principalTable: "MediaContents",
                         principalColumn: "Id",
@@ -472,24 +469,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "AnimeStudioAnimes",
+                name: "AnimeStudioAnime",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AnimeId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     AnimeStudioId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AnimeStudioAnimes", x => x.Id);
+                    table.PrimaryKey("PK_AnimeStudioAnime", x => new { x.AnimeId, x.AnimeStudioId });
                     table.ForeignKey(
-                        name: "FK_AnimeStudioAnimes_AnimeStudios_AnimeStudioId",
+                        name: "FK_AnimeStudioAnime_AnimeStudios_AnimeStudioId",
                         column: x => x.AnimeStudioId,
                         principalTable: "AnimeStudios",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_AnimeStudioAnimes_Animes_AnimeId",
+                        name: "FK_AnimeStudioAnime_Animes_AnimeId",
                         column: x => x.AnimeId,
                         principalTable: "Animes",
                         principalColumn: "Id",
@@ -497,24 +493,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameDeveloperGames",
+                name: "GameDeveloperGame",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GameId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    GameDeveloperId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    GameDeveloperId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    GameId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameDeveloperGames", x => x.Id);
+                    table.PrimaryKey("PK_GameDeveloperGame", x => new { x.GameDeveloperId, x.GameId });
                     table.ForeignKey(
-                        name: "FK_GameDeveloperGames_GameDevelopers_GameDeveloperId",
+                        name: "FK_GameDeveloperGame_GameDevelopers_GameDeveloperId",
                         column: x => x.GameDeveloperId,
                         principalTable: "GameDevelopers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameDeveloperGames_Games_GameId",
+                        name: "FK_GameDeveloperGame_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
@@ -522,24 +517,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GamePlatformGames",
+                name: "GamePlatformGame",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GamePlatformId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GamePlatformGames", x => x.Id);
+                    table.PrimaryKey("PK_GamePlatformGame", x => new { x.GameId, x.GamePlatformId });
                     table.ForeignKey(
-                        name: "FK_GamePlatformGames_GamePlatforms_GamePlatformId",
+                        name: "FK_GamePlatformGame_GamePlatforms_GamePlatformId",
                         column: x => x.GamePlatformId,
                         principalTable: "GamePlatforms",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamePlatformGames_Games_GameId",
+                        name: "FK_GamePlatformGame_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
@@ -547,24 +541,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GamePublisherGames",
+                name: "GamePublisherGame",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GamePublisherId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GamePublisherGames", x => x.Id);
+                    table.PrimaryKey("PK_GamePublisherGame", x => new { x.GameId, x.GamePublisherId });
                     table.ForeignKey(
-                        name: "FK_GamePublisherGames_GamePublishers_GamePublisherId",
+                        name: "FK_GamePublisherGame_GamePublishers_GamePublisherId",
                         column: x => x.GamePublisherId,
                         principalTable: "GamePublishers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GamePublisherGames_Games_GameId",
+                        name: "FK_GamePublisherGame_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
@@ -572,24 +565,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "GameTagGames",
+                name: "GameTagGame",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameId = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     GameTagId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_GameTagGames", x => x.Id);
+                    table.PrimaryKey("PK_GameTagGame", x => new { x.GameId, x.GameTagId });
                     table.ForeignKey(
-                        name: "FK_GameTagGames_GameTags_GameTagId",
+                        name: "FK_GameTagGame_GameTags_GameTagId",
                         column: x => x.GameTagId,
                         principalTable: "GameTags",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_GameTagGames_Games_GameId",
+                        name: "FK_GameTagGame_Games_GameId",
                         column: x => x.GameId,
                         principalTable: "Games",
                         principalColumn: "Id",
@@ -597,24 +589,23 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "MangaAuthorMangas",
+                name: "MangaAuthorManga",
                 columns: table => new
                 {
-                    Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MangaId = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    MangaAuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                    MangaAuthorId = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MangaId = table.Column<string>(type: "nvarchar(450)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_MangaAuthorMangas", x => x.Id);
+                    table.PrimaryKey("PK_MangaAuthorManga", x => new { x.MangaAuthorId, x.MangaId });
                     table.ForeignKey(
-                        name: "FK_MangaAuthorMangas_MangaAuthors_MangaAuthorId",
+                        name: "FK_MangaAuthorManga_MangaAuthors_MangaAuthorId",
                         column: x => x.MangaAuthorId,
                         principalTable: "MangaAuthors",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_MangaAuthorMangas_Mangas_MangaId",
+                        name: "FK_MangaAuthorManga_Mangas_MangaId",
                         column: x => x.MangaId,
                         principalTable: "Mangas",
                         principalColumn: "Id",
@@ -622,13 +613,8 @@ namespace MediaHub.DAL.Migrations
                 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_ActorMovieInfos_ActorId",
-                table: "ActorMovieInfos",
-                column: "ActorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ActorMovieInfos_MovieInfoId",
-                table: "ActorMovieInfos",
+                name: "IX_ActorMovieInfo_MovieInfoId",
+                table: "ActorMovieInfo",
                 column: "MovieInfoId");
 
             migrationBuilder.CreateIndex(
@@ -638,13 +624,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_AnimeStudioAnimes_AnimeId",
-                table: "AnimeStudioAnimes",
-                column: "AnimeId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_AnimeStudioAnimes_AnimeStudioId",
-                table: "AnimeStudioAnimes",
+                name: "IX_AnimeStudioAnime_AnimeStudioId",
+                table: "AnimeStudioAnime",
                 column: "AnimeStudioId");
 
             migrationBuilder.CreateIndex(
@@ -660,13 +641,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_DirectorMovieInfos_DirectorId",
-                table: "DirectorMovieInfos",
-                column: "DirectorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_DirectorMovieInfos_MovieInfoId",
-                table: "DirectorMovieInfos",
+                name: "IX_DirectorMovieInfo_MovieInfoId",
+                table: "DirectorMovieInfo",
                 column: "MovieInfoId");
 
             migrationBuilder.CreateIndex(
@@ -688,13 +664,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameDeveloperGames_GameDeveloperId",
-                table: "GameDeveloperGames",
-                column: "GameDeveloperId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GameDeveloperGames_GameId",
-                table: "GameDeveloperGames",
+                name: "IX_GameDeveloperGame_GameId",
+                table: "GameDeveloperGame",
                 column: "GameId");
 
             migrationBuilder.CreateIndex(
@@ -704,13 +675,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GamePlatformGames_GameId",
-                table: "GamePlatformGames",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GamePlatformGames_GamePlatformId",
-                table: "GamePlatformGames",
+                name: "IX_GamePlatformGame_GamePlatformId",
+                table: "GamePlatformGame",
                 column: "GamePlatformId");
 
             migrationBuilder.CreateIndex(
@@ -720,13 +686,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GamePublisherGames_GameId",
-                table: "GamePublisherGames",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GamePublisherGames_GamePublisherId",
-                table: "GamePublisherGames",
+                name: "IX_GamePublisherGame_GamePublisherId",
+                table: "GamePublisherGame",
                 column: "GamePublisherId");
 
             migrationBuilder.CreateIndex(
@@ -742,13 +703,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_GameTagGames_GameId",
-                table: "GameTagGames",
-                column: "GameId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_GameTagGames_GameTagId",
-                table: "GameTagGames",
+                name: "IX_GameTagGame_GameTagId",
+                table: "GameTagGame",
                 column: "GameTagId");
 
             migrationBuilder.CreateIndex(
@@ -774,13 +730,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MangaAuthorMangas_MangaAuthorId",
-                table: "MangaAuthorMangas",
-                column: "MangaAuthorId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MangaAuthorMangas_MangaId",
-                table: "MangaAuthorMangas",
+                name: "IX_MangaAuthorManga_MangaId",
+                table: "MangaAuthorManga",
                 column: "MangaId");
 
             migrationBuilder.CreateIndex(
@@ -796,13 +747,8 @@ namespace MediaHub.DAL.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_MediaContentGenres_GenreId",
-                table: "MediaContentGenres",
-                column: "GenreId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_MediaContentGenres_MediaContentId",
-                table: "MediaContentGenres",
+                name: "IX_MediaContentGenre_MediaContentId",
+                table: "MediaContentGenre",
                 column: "MediaContentId");
 
             migrationBuilder.CreateIndex(
@@ -870,37 +816,37 @@ namespace MediaHub.DAL.Migrations
                 table: "RecommendationCollectionUserAccesses");
 
             migrationBuilder.DropTable(
-                name: "ActorMovieInfos");
+                name: "ActorMovieInfo");
 
             migrationBuilder.DropTable(
-                name: "AnimeStudioAnimes");
+                name: "AnimeStudioAnime");
 
             migrationBuilder.DropTable(
-                name: "DirectorMovieInfos");
+                name: "DirectorMovieInfo");
 
             migrationBuilder.DropTable(
                 name: "Films");
 
             migrationBuilder.DropTable(
-                name: "GameDeveloperGames");
+                name: "GameDeveloperGame");
 
             migrationBuilder.DropTable(
-                name: "GamePlatformGames");
+                name: "GamePlatformGame");
 
             migrationBuilder.DropTable(
-                name: "GamePublisherGames");
+                name: "GamePublisherGame");
 
             migrationBuilder.DropTable(
-                name: "GameTagGames");
+                name: "GameTagGame");
 
             migrationBuilder.DropTable(
                 name: "GenreEvaluations");
 
             migrationBuilder.DropTable(
-                name: "MangaAuthorMangas");
+                name: "MangaAuthorManga");
 
             migrationBuilder.DropTable(
-                name: "MediaContentGenres");
+                name: "MediaContentGenre");
 
             migrationBuilder.DropTable(
                 name: "MediaContentPictures");

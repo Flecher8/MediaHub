@@ -18,5 +18,5 @@ public class Manga
     public int NumberOfVolumes { get; set; } = 0;
     public int NumberOfChapters { get; set; } = 0;
 
-    public List<MangaAuthorManga> MangaAuthorMangas { get; set; } = new List<MangaAuthorManga>();
+    public List<MangaAuthor> MangaAuthors { get; set; } = new List<MangaAuthor>();
 }

@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class MangaAuthorRepository : BaseFilterableRepository<MangaAuthor>, IMangaAuthorRepository
 {
     // Constructor accepting the database context.
-    public MangaAuthorRepository(DataContext dbContext) : base(dbContext) { }
+    public MangaAuthorRepository(DataContext dbContext, BaseFilterBuilder<MangaAuthor> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

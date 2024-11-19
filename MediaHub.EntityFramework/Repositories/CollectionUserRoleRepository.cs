@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class CollectionUserRoleRepository : BaseFilterableRepository<CollectionUserRole>, ICollectionUserRoleRepository
 {
     // Constructor accepting the database context.
-    public CollectionUserRoleRepository(DataContext dbContext) : base(dbContext) { }
+    public CollectionUserRoleRepository(DataContext dbContext, BaseFilterBuilder<CollectionUserRole> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

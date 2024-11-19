@@ -12,5 +12,8 @@ namespace MediaHub.EntityFramewok.Repositories;
 public class ActorRepository : BaseFilterableRepository<Actor>, IActorRepository
 {
     // Constructor accepting the database context.
-    public ActorRepository(DataContext dbContext) : base(dbContext) { }
+    public ActorRepository(DataContext dbContext, BaseFilterBuilder<Actor> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

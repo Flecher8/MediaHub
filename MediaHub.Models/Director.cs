@@ -9,5 +9,6 @@ public class Director
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<DirectorMovieInfo> DirectorMovieInfos { get; set; } = new List<DirectorMovieInfo>();
+
+    public List<MovieInfo> MovieInfos { get; set; } = new List<MovieInfo>();
 }

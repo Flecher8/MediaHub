@@ -16,8 +16,8 @@ public class Game
     public double PlaytimeHours { get; set; }
     public double EsrbRating { get; set; }
 
-    public List<GamePlatformGame> GamePlatformGames { get; set; } = new List<GamePlatformGame>();
-    public List<GameDeveloperGame> GameDeveloperGames { get; set; } = new List<GameDeveloperGame>();
-    public List<GamePublisherGame> GamePublisherGames { get; set; } = new List<GamePublisherGame>();
-    public List<GameTagGame> GameTagGames { get; set; } = new List<GameTagGame>();
+    public List<GamePlatform> GamePlatforms { get; set; } = new List<GamePlatform>();
+    public List<GameDeveloper> GameDevelopers { get; set; } = new List<GameDeveloper>();
+    public List<GamePublisher> GamePublishers { get; set; } = new List<GamePublisher>();
+    public List<GameTag> GameTags { get; set; } = new List<GameTag>();
 }

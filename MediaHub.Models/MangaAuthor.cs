@@ -9,5 +9,6 @@ public class MangaAuthor
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<MangaAuthorManga> MangaAuthorMangas { get; set; } = new List<MangaAuthorManga>();
+
+    public List<Manga> Mangas { get; set; } = new List<Manga>();
 }

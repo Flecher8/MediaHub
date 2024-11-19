@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class EvaluationRepository : BaseFilterableRepository<Evaluation>, IEvaluationRepository
 {
     // Constructor accepting the database context.
-    public EvaluationRepository(DataContext dbContext) : base(dbContext) { }
+    public EvaluationRepository(DataContext dbContext, BaseFilterBuilder<Evaluation> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

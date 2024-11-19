@@ -22,6 +22,141 @@ namespace MediaHub.DAL.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
+            modelBuilder.Entity("ActorMovieInfo", b =>
+                {
+                    b.Property<string>("ActorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MovieInfoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("ActorId", "MovieInfoId");
+
+                    b.HasIndex("MovieInfoId");
+
+                    b.ToTable("ActorMovieInfo");
+                });
+
+            modelBuilder.Entity("AnimeStudioAnime", b =>
+                {
+                    b.Property<string>("AnimeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("AnimeStudioId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("AnimeId", "AnimeStudioId");
+
+                    b.HasIndex("AnimeStudioId");
+
+                    b.ToTable("AnimeStudioAnime");
+                });
+
+            modelBuilder.Entity("DirectorMovieInfo", b =>
+                {
+                    b.Property<string>("DirectorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MovieInfoId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("DirectorId", "MovieInfoId");
+
+                    b.HasIndex("MovieInfoId");
+
+                    b.ToTable("DirectorMovieInfo");
+                });
+
+            modelBuilder.Entity("GameDeveloperGame", b =>
+                {
+                    b.Property<string>("GameDeveloperId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GameDeveloperId", "GameId");
+
+                    b.HasIndex("GameId");
+
+                    b.ToTable("GameDeveloperGame");
+                });
+
+            modelBuilder.Entity("GamePlatformGame", b =>
+                {
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GamePlatformId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GameId", "GamePlatformId");
+
+                    b.HasIndex("GamePlatformId");
+
+                    b.ToTable("GamePlatformGame");
+                });
+
+            modelBuilder.Entity("GamePublisherGame", b =>
+                {
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GamePublisherId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GameId", "GamePublisherId");
+
+                    b.HasIndex("GamePublisherId");
+
+                    b.ToTable("GamePublisherGame");
+                });
+
+            modelBuilder.Entity("GameTagGame", b =>
+                {
+                    b.Property<string>("GameId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("GameTagId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GameId", "GameTagId");
+
+                    b.HasIndex("GameTagId");
+
+                    b.ToTable("GameTagGame");
+                });
+
+            modelBuilder.Entity("MangaAuthorManga", b =>
+                {
+                    b.Property<string>("MangaAuthorId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MangaId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("MangaAuthorId", "MangaId");
+
+                    b.HasIndex("MangaId");
+
+                    b.ToTable("MangaAuthorManga");
+                });
+
+            modelBuilder.Entity("MediaContentGenre", b =>
+                {
+                    b.Property<string>("GenreId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("MediaContentId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.HasKey("GenreId", "MediaContentId");
+
+                    b.HasIndex("MediaContentId");
+
+                    b.ToTable("MediaContentGenre");
+                });
+
             modelBuilder.Entity("MediaHub.Models.Actor", b =>
                 {
                     b.Property<string>("Id")
@@ -35,28 +170,6 @@ namespace MediaHub.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Actors");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.ActorMovieInfo", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ActorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MovieInfoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ActorId");
-
-                    b.HasIndex("MovieInfoId");
-
-                    b.ToTable("ActorMovieInfos");
                 });
 
             modelBuilder.Entity("MediaHub.Models.Anime", b =>
@@ -110,28 +223,6 @@ namespace MediaHub.DAL.Migrations
                     b.ToTable("AnimeStudios");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.AnimeStudioAnime", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AnimeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("AnimeStudioId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("AnimeId");
-
-                    b.HasIndex("AnimeStudioId");
-
-                    b.ToTable("AnimeStudioAnimes");
-                });
-
             modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
                 {
                     b.Property<string>("Id")
@@ -181,28 +272,6 @@ namespace MediaHub.DAL.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Directors");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.DirectorMovieInfo", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("DirectorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MovieInfoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("DirectorId");
-
-                    b.HasIndex("MovieInfoId");
-
-                    b.ToTable("DirectorMovieInfos");
                 });
 
             modelBuilder.Entity("MediaHub.Models.Evaluation", b =>
@@ -297,28 +366,6 @@ namespace MediaHub.DAL.Migrations
                     b.ToTable("GameDevelopers");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GameDeveloperGame", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameDeveloperId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameDeveloperId");
-
-                    b.HasIndex("GameId");
-
-                    b.ToTable("GameDeveloperGames");
-                });
-
             modelBuilder.Entity("MediaHub.Models.GamePlatform", b =>
                 {
                     b.Property<string>("Id")
@@ -335,28 +382,6 @@ namespace MediaHub.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("GamePlatforms");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GamePlatformGame", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GamePlatformId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GamePlatformId");
-
-                    b.ToTable("GamePlatformGames");
                 });
 
             modelBuilder.Entity("MediaHub.Models.GamePublisher", b =>
@@ -377,28 +402,6 @@ namespace MediaHub.DAL.Migrations
                     b.ToTable("GamePublishers");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GamePublisherGame", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GamePublisherId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GamePublisherId");
-
-                    b.ToTable("GamePublisherGames");
-                });
-
             modelBuilder.Entity("MediaHub.Models.GameTag", b =>
                 {
                     b.Property<string>("Id")
@@ -415,28 +418,6 @@ namespace MediaHub.DAL.Migrations
                         .IsUnique();
 
                     b.ToTable("GameTags");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GameTagGame", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GameTagId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GameId");
-
-                    b.HasIndex("GameTagId");
-
-                    b.ToTable("GameTagGames");
                 });
 
             modelBuilder.Entity("MediaHub.Models.Genre", b =>
@@ -540,28 +521,6 @@ namespace MediaHub.DAL.Migrations
                     b.ToTable("MangaAuthors");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MangaAuthorManga", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MangaAuthorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MangaId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("MangaAuthorId");
-
-                    b.HasIndex("MangaId");
-
-                    b.ToTable("MangaAuthorMangas");
-                });
-
             modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
                 {
                     b.Property<string>("Id")
@@ -598,28 +557,6 @@ namespace MediaHub.DAL.Migrations
                     b.HasIndex("MediaContentTypeId");
 
                     b.ToTable("MediaContents");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.MediaContentGenre", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GenreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GenreId");
-
-                    b.HasIndex("MediaContentId");
-
-                    b.ToTable("MediaContentGenres");
                 });
 
             modelBuilder.Entity("MediaHub.Models.MediaContentPicture", b =>
@@ -985,23 +922,139 @@ namespace MediaHub.DAL.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("MediaHub.Models.ActorMovieInfo", b =>
+            modelBuilder.Entity("ActorMovieInfo", b =>
                 {
-                    b.HasOne("MediaHub.Models.Actor", "Actor")
-                        .WithMany("ActorMovieInfos")
+                    b.HasOne("MediaHub.Models.Actor", null)
+                        .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MovieInfo", "MovieInfo")
-                        .WithMany("ActorMovieInfos")
+                    b.HasOne("MediaHub.Models.MovieInfo", null)
+                        .WithMany()
                         .HasForeignKey("MovieInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
 
-                    b.Navigation("Actor");
+            modelBuilder.Entity("AnimeStudioAnime", b =>
+                {
+                    b.HasOne("MediaHub.Models.Anime", null)
+                        .WithMany()
+                        .HasForeignKey("AnimeId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("MovieInfo");
+                    b.HasOne("MediaHub.Models.AnimeStudio", null)
+                        .WithMany()
+                        .HasForeignKey("AnimeStudioId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("DirectorMovieInfo", b =>
+                {
+                    b.HasOne("MediaHub.Models.Director", null)
+                        .WithMany()
+                        .HasForeignKey("DirectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.MovieInfo", null)
+                        .WithMany()
+                        .HasForeignKey("MovieInfoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GameDeveloperGame", b =>
+                {
+                    b.HasOne("MediaHub.Models.GameDeveloper", null)
+                        .WithMany()
+                        .HasForeignKey("GameDeveloperId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamePlatformGame", b =>
+                {
+                    b.HasOne("MediaHub.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.GamePlatform", null)
+                        .WithMany()
+                        .HasForeignKey("GamePlatformId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GamePublisherGame", b =>
+                {
+                    b.HasOne("MediaHub.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.GamePublisher", null)
+                        .WithMany()
+                        .HasForeignKey("GamePublisherId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("GameTagGame", b =>
+                {
+                    b.HasOne("MediaHub.Models.Game", null)
+                        .WithMany()
+                        .HasForeignKey("GameId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.GameTag", null)
+                        .WithMany()
+                        .HasForeignKey("GameTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MangaAuthorManga", b =>
+                {
+                    b.HasOne("MediaHub.Models.MangaAuthor", null)
+                        .WithMany()
+                        .HasForeignKey("MangaAuthorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.Manga", null)
+                        .WithMany()
+                        .HasForeignKey("MangaId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("MediaContentGenre", b =>
+                {
+                    b.HasOne("MediaHub.Models.Genre", null)
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("MediaHub.Models.MediaContent", null)
+                        .WithMany()
+                        .HasForeignKey("MediaContentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("MediaHub.Models.Anime", b =>
@@ -1013,44 +1066,6 @@ namespace MediaHub.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("MediaContent");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.AnimeStudioAnime", b =>
-                {
-                    b.HasOne("MediaHub.Models.Anime", "Anime")
-                        .WithMany("AnimeStudioAnimes")
-                        .HasForeignKey("AnimeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.AnimeStudio", "AnimeStudio")
-                        .WithMany("AnimeStudiosAnimes")
-                        .HasForeignKey("AnimeStudioId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Anime");
-
-                    b.Navigation("AnimeStudio");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.DirectorMovieInfo", b =>
-                {
-                    b.HasOne("MediaHub.Models.Director", "Director")
-                        .WithMany("DirectorMovieInfos")
-                        .HasForeignKey("DirectorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.MovieInfo", "MovieInfo")
-                        .WithMany("DirectorMovieInfos")
-                        .HasForeignKey("MovieInfoId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Director");
-
-                    b.Navigation("MovieInfo");
                 });
 
             modelBuilder.Entity("MediaHub.Models.Film", b =>
@@ -1083,82 +1098,6 @@ namespace MediaHub.DAL.Migrations
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GameDeveloperGame", b =>
-                {
-                    b.HasOne("MediaHub.Models.GameDeveloper", "GameDeveloper")
-                        .WithMany("GameDeveloperGames")
-                        .HasForeignKey("GameDeveloperId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.Game", "Game")
-                        .WithMany("GameDeveloperGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("GameDeveloper");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GamePlatformGame", b =>
-                {
-                    b.HasOne("MediaHub.Models.Game", "Game")
-                        .WithMany("GamePlatformGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.GamePlatform", "GamePlatform")
-                        .WithMany("GamePlatformGames")
-                        .HasForeignKey("GamePlatformId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("GamePlatform");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GamePublisherGame", b =>
-                {
-                    b.HasOne("MediaHub.Models.Game", "Game")
-                        .WithMany("GamePublisherGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.GamePublisher", "GamePublisher")
-                        .WithMany("GamePublisherGames")
-                        .HasForeignKey("GamePublisherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("GamePublisher");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GameTagGame", b =>
-                {
-                    b.HasOne("MediaHub.Models.Game", "Game")
-                        .WithMany("GameTagGames")
-                        .HasForeignKey("GameId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.GameTag", "GameTag")
-                        .WithMany("GameTagGames")
-                        .HasForeignKey("GameTagId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Game");
-
-                    b.Navigation("GameTag");
-                });
-
             modelBuilder.Entity("MediaHub.Models.GenreEvaluation", b =>
                 {
                     b.HasOne("MediaHub.Models.Genre", "Genre")
@@ -1189,25 +1128,6 @@ namespace MediaHub.DAL.Migrations
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MangaAuthorManga", b =>
-                {
-                    b.HasOne("MediaHub.Models.MangaAuthor", "MangaAuthor")
-                        .WithMany("MangaAuthorMangas")
-                        .HasForeignKey("MangaAuthorId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.Manga", "Manga")
-                        .WithMany("MangaAuthorMangas")
-                        .HasForeignKey("MangaId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Manga");
-
-                    b.Navigation("MangaAuthor");
-                });
-
             modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
                 {
                     b.HasOne("MediaHub.Models.MediaContentType", "MediaContentType")
@@ -1217,25 +1137,6 @@ namespace MediaHub.DAL.Migrations
                         .IsRequired();
 
                     b.Navigation("MediaContentType");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.MediaContentGenre", b =>
-                {
-                    b.HasOne("MediaHub.Models.Genre", "Genre")
-                        .WithMany("MediaContentGenres")
-                        .HasForeignKey("GenreId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
-                        .WithMany("MediaContentGenres")
-                        .HasForeignKey("MediaContentId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Genre");
-
-                    b.Navigation("MediaContent");
                 });
 
             modelBuilder.Entity("MediaHub.Models.MediaContentPicture", b =>
@@ -1391,21 +1292,6 @@ namespace MediaHub.DAL.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Actor", b =>
-                {
-                    b.Navigation("ActorMovieInfos");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.Anime", b =>
-                {
-                    b.Navigation("AnimeStudioAnimes");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.AnimeStudio", b =>
-                {
-                    b.Navigation("AnimeStudiosAnimes");
-                });
-
             modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
                 {
                     b.Navigation("RecommendationCollectionUserAccesses");
@@ -1416,62 +1302,14 @@ namespace MediaHub.DAL.Migrations
                     b.Navigation("MediaInteractionStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Director", b =>
-                {
-                    b.Navigation("DirectorMovieInfos");
-                });
-
             modelBuilder.Entity("MediaHub.Models.Evaluation", b =>
                 {
                     b.Navigation("MediaInteractionStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Game", b =>
-                {
-                    b.Navigation("GameDeveloperGames");
-
-                    b.Navigation("GamePlatformGames");
-
-                    b.Navigation("GamePublisherGames");
-
-                    b.Navigation("GameTagGames");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GameDeveloper", b =>
-                {
-                    b.Navigation("GameDeveloperGames");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GamePlatform", b =>
-                {
-                    b.Navigation("GamePlatformGames");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GamePublisher", b =>
-                {
-                    b.Navigation("GamePublisherGames");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.GameTag", b =>
-                {
-                    b.Navigation("GameTagGames");
-                });
-
             modelBuilder.Entity("MediaHub.Models.Genre", b =>
                 {
                     b.Navigation("GenreEvaluations");
-
-                    b.Navigation("MediaContentGenres");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.Manga", b =>
-                {
-                    b.Navigation("MangaAuthorMangas");
-                });
-
-            modelBuilder.Entity("MediaHub.Models.MangaAuthor", b =>
-                {
-                    b.Navigation("MangaAuthorMangas");
                 });
 
             modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
@@ -1483,8 +1321,6 @@ namespace MediaHub.DAL.Migrations
                     b.Navigation("Game");
 
                     b.Navigation("Manga");
-
-                    b.Navigation("MediaContentGenres");
 
                     b.Navigation("MediaContentPictures");
 
@@ -1500,10 +1336,6 @@ namespace MediaHub.DAL.Migrations
 
             modelBuilder.Entity("MediaHub.Models.MovieInfo", b =>
                 {
-                    b.Navigation("ActorMovieInfos");
-
-                    b.Navigation("DirectorMovieInfos");
-
                     b.Navigation("Film");
 
                     b.Navigation("Serial");

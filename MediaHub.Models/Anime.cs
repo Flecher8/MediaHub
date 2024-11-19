@@ -17,5 +17,5 @@ public class Anime
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
 
-    public List<AnimeStudioAnime> AnimeStudioAnimes { get; set; } = new List<AnimeStudioAnime>();
+    public List<AnimeStudio> AnimeStudios { get; set; } = new List<AnimeStudio>();
 }

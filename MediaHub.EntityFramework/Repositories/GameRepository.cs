@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class GameRepository : BaseFilterableRepository<Game>, IGameRepository
 {
     // Constructor accepting the database context.
-    public GameRepository(DataContext dbContext) : base(dbContext) { }
+    public GameRepository(DataContext dbContext, BaseFilterBuilder<Game> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

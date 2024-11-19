@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class MediaInteractionStatusRepository : BaseFilterableRepository<MediaInteractionStatus>, IMediaInteractionStatusRepository
 {
     // Constructor accepting the database context.
-    public MediaInteractionStatusRepository(DataContext dbContext) : base(dbContext) { }
+    public MediaInteractionStatusRepository(DataContext dbContext, BaseFilterBuilder<MediaInteractionStatus> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }

@@ -13,6 +13,7 @@ public class MovieInfo
     public Film? Film { get; set; }
     public Serial? Serial { get; set; }
 
-    public List<DirectorMovieInfo> DirectorMovieInfos { get; set; } = new List<DirectorMovieInfo>();
-    public List<ActorMovieInfo> ActorMovieInfos { get; set; } = new List<ActorMovieInfo>();
+    public List<Director> Directors { get; set; } = new List<Director>();
+
+    public List<Actor> Actors { get; set; } = new List<Actor>();
 }

@@ -9,5 +9,6 @@ public class Actor
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<ActorMovieInfo> ActorMovieInfos { get; set; } = new List<ActorMovieInfo>();
+
+    public List<MovieInfo> MovieInfos { get; set; } = new List<MovieInfo>();
 }

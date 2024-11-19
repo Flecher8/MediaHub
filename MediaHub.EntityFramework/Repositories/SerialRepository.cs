@@ -13,5 +13,8 @@ namespace MediaHub.EntityFramework.Repositories;
 public class SerialRepository : BaseFilterableRepository<Serial>, ISerialRepository
 {
     // Constructor accepting the database context.
-    public SerialRepository(DataContext dbContext) : base(dbContext) { }
+    public SerialRepository(DataContext dbContext, BaseFilterBuilder<Serial> filterBuilder)
+        : base(dbContext, filterBuilder)
+    {
+    }
 }
