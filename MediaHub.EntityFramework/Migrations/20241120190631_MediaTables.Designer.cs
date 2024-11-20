@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaHub.DAL.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241119190028_AddedMediaModelTables")]
-    partial class AddedMediaModelTables
+    [Migration("20241120190631_MediaTables")]
+    partial class MediaTables
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1209,7 +1209,7 @@ namespace MediaHub.DAL.Migrations
                     b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
                         .WithMany("RecommendationCollectionUserAccesses")
                         .HasForeignKey("RecommendationCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MediaHub.Models.User", "User")

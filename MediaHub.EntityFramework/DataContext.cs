@@ -329,7 +329,7 @@ namespace MediaHub.EntityFramewok
                       .WithMany(rc => rc.RecommendationCollectionUserAccesses)
                       .HasForeignKey(rcua => rcua.RecommendationCollectionId)
                       .IsRequired()
-                      .OnDelete(DeleteBehavior.Cascade);
+                      .OnDelete(DeleteBehavior.Restrict);
 
                 entity.HasOne(rcua => rcua.CollectionUserRole)
                       .WithMany(cr => cr.RecommendationCollectionUserAccesses)

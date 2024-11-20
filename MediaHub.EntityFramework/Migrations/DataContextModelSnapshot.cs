@@ -1206,7 +1206,7 @@ namespace MediaHub.DAL.Migrations
                     b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
                         .WithMany("RecommendationCollectionUserAccesses")
                         .HasForeignKey("RecommendationCollectionId")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("MediaHub.Models.User", "User")
