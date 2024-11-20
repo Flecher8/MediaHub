@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using MediaHub.EntityFramework.Abstract;
 using MediaHub.EntityFramework.Abstract.IRepositories;
-using MediaHub.Models;
+using MediaHub.Models.Entities;
 
 namespace MediaHub.EntityFramework.Repositories;
 public class ActorRepository : BaseFilterableRepository<Actor>, IActorRepository

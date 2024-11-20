@@ -4,8 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
-public class Anime
+namespace MediaHub.Models.Entities;
+public class Manga
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
 
@@ -13,9 +13,10 @@ public class Anime
     public MediaContent MediaContent { get; set; }
 
     public int Rank { get; set; }
-    public int NumberOfEpisodes { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
+    public int NumberOfVolumes { get; set; } = 0;
+    public int NumberOfChapters { get; set; } = 0;
 
-    public List<AnimeStudio> AnimeStudios { get; set; } = new List<AnimeStudio>();
+    public List<MangaAuthor> MangaAuthors { get; set; } = new List<MangaAuthor>();
 }

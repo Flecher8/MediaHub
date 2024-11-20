@@ -4,11 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
-public class GamePlatform
+namespace MediaHub.Models.Entities;
+public class Director
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
 
-    public List<Game> Games { get; set; } = new List<Game>();
+    public List<MovieInfo> MovieInfos { get; set; } = new List<MovieInfo>();
 }

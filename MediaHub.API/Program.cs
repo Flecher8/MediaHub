@@ -1,5 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using MediaHub.Models;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using MediaHub.EntityFramework;
@@ -7,6 +6,7 @@ using MediaHub.EntityFramework.Abstract;
 using MediaHub.EntityFramework.Repositories;
 using MediaHub.EntityFramework.Abstract.IRepositories;
 using MediaHub.API.Middlewares;
+using MediaHub.Models.Entities;
 
 namespace MediaHub.API
 {

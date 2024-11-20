@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
-public class Actor
+namespace MediaHub.Models.Entities;
+public class CollectionUserRole
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-
-    public List<MovieInfo> MovieInfos { get; set; } = new List<MovieInfo>();
+    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccesses { get; set; } = new List<RecommendationCollectionUserAccess>();
 }

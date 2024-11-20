@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
-public class ContentStatus
+namespace MediaHub.Models.Entities;
+public class MediaContentType
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-    public List<MediaInteractionStatus> MediaInteractionStatuses { get; set; } = new List<MediaInteractionStatus>();
+    public List<MediaContent> MediaContents { get; set; } = new List<MediaContent>();
 }

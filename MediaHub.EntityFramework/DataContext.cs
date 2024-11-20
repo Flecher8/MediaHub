@@ -1,4 +1,4 @@
-﻿using MediaHub.Models;
+﻿using MediaHub.Models.Entities;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

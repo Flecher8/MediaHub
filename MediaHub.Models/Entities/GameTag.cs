@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
+namespace MediaHub.Models.Entities;
 public class GameTag
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();

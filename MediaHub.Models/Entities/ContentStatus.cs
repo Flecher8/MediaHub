@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.Models;
-public class AnimeStudio
+namespace MediaHub.Models.Entities;
+public class ContentStatus
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
     public required string Name { get; set; }
-
-    public List<Anime> Animes { get; set; } = new List<Anime>();
+    public List<MediaInteractionStatus> MediaInteractionStatuses { get; set; } = new List<MediaInteractionStatus>();
 }
