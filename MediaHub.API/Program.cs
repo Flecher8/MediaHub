@@ -1,11 +1,11 @@
-﻿
-
-using Microsoft.EntityFrameworkCore;
-using MediaHub.EntityFramewok;
+﻿using Microsoft.EntityFrameworkCore;
 using MediaHub.Models;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
-using MediaHub.EntityFramewok.Abstract;
+using MediaHub.EntityFramework;
+using MediaHub.EntityFramework.Abstract;
+using MediaHub.EntityFramework.Repositories;
+using MediaHub.EntityFramework.Abstract.IRepositories;
 
 namespace MediaHub.API
 {
@@ -17,6 +17,34 @@ namespace MediaHub.API
 
             // Add services to the container.
             builder.Services.AddScoped(typeof(BaseFilterBuilder<>));
+
+            // Repositories
+            builder.Services.AddScoped<IActorRepository, ActorRepository>();
+            builder.Services.AddScoped<IAnimeRepository, AnimeRepository>();
+            builder.Services.AddScoped<IAnimeStudioRepository, AnimeStudioRepository>();
+            builder.Services.AddScoped<ICollectionUserRoleRepository, CollectionUserRoleRepository>();
+            builder.Services.AddScoped<IContentStatusRepository, ContentStatusRepository>();
+            builder.Services.AddScoped<IDirectorRepository, DirectorRepository>();
+            builder.Services.AddScoped<IEvaluationRepository, EvaluationRepository>();
+            builder.Services.AddScoped<IFilmRepository, FilmRepository>();
+            builder.Services.AddScoped<IGameDeveloperRepository, GameDeveloperRepository>();
+            builder.Services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
+            builder.Services.AddScoped<IGameRepository, GameRepository>();
+            builder.Services.AddScoped<IGameTagRepository, GameTagRepository>();
+            builder.Services.AddScoped<IGenreEvaluationRepository, GenreEvaluationRepository>();
+            builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+            builder.Services.AddScoped<IMangaAuthorRepository, MangaAuthorRepository>();
+            builder.Services.AddScoped<IMangaRepository, MangaRepository>();
+            builder.Services.AddScoped<IMediaContentPictureRepository, MediaContentPictureRepository>();
+            builder.Services.AddScoped<IMediaContentRepository, MediaContentRepository>();
+            builder.Services.AddScoped<IMediaContentTypeRepository, MediaContentTypeRepository>();
+            builder.Services.AddScoped<IMediaInteractionStatusRepository, MediaInteractionStatusRepository>();
+            builder.Services.AddScoped<IMovieInfoRepository, MovieInfoRepository>();
+            builder.Services.AddScoped<IRecommendationCollectionRepository, RecommendationCollectionRepository>();
+            builder.Services.AddScoped<IRecommendationCollectionUserAccessRepository, RecommendationCollectionUserAccessRepository>();
+            builder.Services.AddScoped<IRoleRepository, RoleRepository>();
+            builder.Services.AddScoped<ISerialRepository, SerialRepository>();
+            builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
