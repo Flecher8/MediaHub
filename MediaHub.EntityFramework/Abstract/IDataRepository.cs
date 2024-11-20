@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.EntityFramewok.Abstract;
+namespace MediaHub.EntityFramework.Abstract;
 public interface IDataRepository<T>
 {
     Task<List<T>> GetAllAsync();

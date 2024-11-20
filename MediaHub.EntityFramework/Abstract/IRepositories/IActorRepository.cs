@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediaHub.EntityFramewok.Abstract;
 using MediaHub.Models;
 
-namespace MediaHub.EntityFramewok.Abstract.IRepositories;
+namespace MediaHub.EntityFramework.Abstract.IRepositories;
 public interface IActorRepository : IFilterableRepository<Actor>
 {
 }

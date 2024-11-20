@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaHub.EntityFramewok.Abstract;
+namespace MediaHub.EntityFramework.Abstract;
 // A base repository class that supports filtering and dynamic includes for any entity type
 public abstract class BaseFilterableRepository<T> : BaseRepository<T>, IFilterableRepository<T>
     where T : class

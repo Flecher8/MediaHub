@@ -3,11 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediaHub.EntityFramewok.Abstract.IRepositories;
-using MediaHub.EntityFramewok.Abstract;
 using MediaHub.Models;
 using MediaHub.EntityFramework.Abstract.IRepositories;
-using MediaHub.EntityFramewok;
+using MediaHub.EntityFramework.Abstract;
 
 namespace MediaHub.EntityFramework.Repositories;
 public class AnimeRepository : BaseFilterableRepository<Anime>, IAnimeRepository

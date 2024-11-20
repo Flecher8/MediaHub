@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MediaHub.EntityFramewok.Abstract.IRepositories;
-using MediaHub.EntityFramewok.Abstract;
-using MediaHub.Models;
+using MediaHub.EntityFramework.Abstract;
 using MediaHub.EntityFramework.Abstract.IRepositories;
-using MediaHub.EntityFramewok;
+using MediaHub.Models;
+
 
 namespace MediaHub.EntityFramework.Repositories;
 public class EvaluationRepository : BaseFilterableRepository<Evaluation>, IEvaluationRepository

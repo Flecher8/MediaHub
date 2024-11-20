@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using MediaHub.EntityFramewok;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaHub.EntityFramewok.Abstract;
+namespace MediaHub.EntityFramework.Abstract;
 public abstract class BaseRepository<T> : IDataRepository<T> where T : class
 {
     protected readonly DataContext _dbContext;

@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
-namespace MediaHub.EntityFramewok
+namespace MediaHub.EntityFramework
 {
     public class DataContext : IdentityDbContext<User, Role, string>
     {

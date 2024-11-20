@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MediaHub.EntityFramewok.Abstract;
+namespace MediaHub.EntityFramework.Abstract;
 // Base filter builder that handles filtering and includes for any entity type
 public class BaseFilterBuilder<T>
 {

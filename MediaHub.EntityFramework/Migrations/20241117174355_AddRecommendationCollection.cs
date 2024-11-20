@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace MediaHub.DAL.Migrations
+namespace MediaHub.EntityFramework.Migrations
 {
     /// <inheritdoc />
     public partial class AddRecommendationCollection : Migration
