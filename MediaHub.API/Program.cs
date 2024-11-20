@@ -6,6 +6,7 @@ using MediaHub.EntityFramework;
 using MediaHub.EntityFramework.Abstract;
 using MediaHub.EntityFramework.Repositories;
 using MediaHub.EntityFramework.Abstract.IRepositories;
+using MediaHub.API.Middlewares;
 
 namespace MediaHub.API
 {
@@ -88,6 +89,9 @@ namespace MediaHub.API
             });
 
             var app = builder.Build();
+
+            // Add your middleware
+            app.UseMiddleware<ExceptionHandlingMiddleware>();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
