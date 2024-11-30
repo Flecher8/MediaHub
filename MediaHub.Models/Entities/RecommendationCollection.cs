@@ -8,6 +8,7 @@ namespace MediaHub.Models.Entities;
 public class RecommendationCollection
 {
     public string Id { get; set; } = Guid.NewGuid().ToString();
+    public string Name { get; set; } = string.Empty;
 
     public required string CreatorId { get; set; }
     public User Creator { get; set; }
