@@ -1,17 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MediaHub.Models.Entities;
+
+[Serializable]
 public class RecommendationCollection
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    public Guid CollectionId { get; set; } = Guid.NewGuid();
 
-    public required string CreatorId { get; set; }
-    public User Creator { get; set; }
-    public List<MediaInteractionStatus> MediaInteractionStatus { get; set; } = new List<MediaInteractionStatus>();
-    public List<GenreEvaluation> GenreEvaluations { get; set; } = new List<GenreEvaluation>();
-    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccesses { get; set; } = new List<RecommendationCollectionUserAccess>();
+    #region Foreign Keys
+
+    //User -> Many to one
+    public required Guid CreatorUserId { get; set; }
+    public User CreatorUser { get; set; }
+
+    //MediaInteractionStatus -> One to many
+    public List<MediaInteractionStatus> MediaInteractionStatus { get; set; } = new();
+
+    //GenreEvaluation -> One to many
+    public List<GenreEvaluation> GenreEvaluations { get; set; } = new();
+
+    //RecommendationCollectionUserAccess -> One to many
+    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccesses { get; set; } = new();
+
+    #endregion
 }

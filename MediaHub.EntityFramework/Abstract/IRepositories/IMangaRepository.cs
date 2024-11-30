@@ -1,11 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediaHub.Models.Entities;
+﻿using MediaHub.Models.Entities;
 
 namespace MediaHub.EntityFramework.Abstract.IRepositories;
-public interface IMangaRepository : IFilterableRepository<Manga>
-{
-}
+
+public interface IMangaRepository : IFilterableRepository<Manga>;

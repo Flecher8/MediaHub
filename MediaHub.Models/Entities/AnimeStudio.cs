@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class AnimeStudio
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid AnimeStudioId { get; set; } = Guid.NewGuid();
+
     public required string Name { get; set; }
 
-    public List<Anime> Animes { get; set; } = new List<Anime>();
+    #region Foreign Keys
+
+    //Anime -> Many to many
+    public List<Anime> Animes { get; set; } = new();
+
+    #endregion
 }

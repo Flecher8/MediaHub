@@ -1,16 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MediaHub.Models.Entities;
+
 public class MediaContentPicture
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
-
-    public required string MediaContentId { get; set; }
-    public MediaContent MediaContent { get; set; }
+    [Key]
+    public Guid PictureId { get; set; } = Guid.NewGuid();
 
     public required string PictureLink { get; set; }
+
+    #region Foreign Keys
+
+    //MediaContent -> One to one
+    public required Guid MediaContentId { get; set; }
+    public MediaContent MediaContent { get; set; }
+
+    #endregion
 }

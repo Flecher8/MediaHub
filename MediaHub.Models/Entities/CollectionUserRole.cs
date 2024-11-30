@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class CollectionUserRole
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid CollectionUserRoleId { get; set; } = Guid.NewGuid();
+
     public required string Name { get; set; }
-    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccesses { get; set; } = new List<RecommendationCollectionUserAccess>();
+
+    #region Foreign Keys
+
+    //RecommendationCollectionUserAccess -> One to many
+    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccesses { get; set; } = new ();
+
+    #endregion
 }

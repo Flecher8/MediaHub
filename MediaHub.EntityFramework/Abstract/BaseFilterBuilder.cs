@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Linq.Expressions;
 
 namespace MediaHub.EntityFramework.Abstract;
+
 // Base filter builder that handles filtering and includes for any entity type
 public class BaseFilterBuilder<T>
 {

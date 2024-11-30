@@ -1,22 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class Manga
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
-
-    public string MediaContentId { get; set; }
-    public MediaContent MediaContent { get; set; }
+    public Guid MangaId { get; set; } = Guid.NewGuid();
 
     public int Rank { get; set; }
     public DateTime StartDate { get; set; }
     public DateTime EndDate { get; set; }
-    public int NumberOfVolumes { get; set; } = 0;
-    public int NumberOfChapters { get; set; } = 0;
+    public int NumberOfVolumes { get; set; }
+    public int NumberOfChapters { get; set; }
 
-    public List<MangaAuthor> MangaAuthors { get; set; } = new List<MangaAuthor>();
+    #region Foreign Keys
+
+    //MediaContent -> One to one
+    public Guid MediaContentId { get; set; }
+    public MediaContent MediaContent { get; set; }
+
+    //MangaAuthor -> Many to many
+    public List<MangaAuthor> MangaAuthors { get; set; } = new();
+
+    #endregion
 }

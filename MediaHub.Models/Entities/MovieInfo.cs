@@ -1,19 +1,21 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class MovieInfo
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid MovieInfoId { get; set; } = Guid.NewGuid();
+
     public double DurationInMinutes { get; set; }
+
+    #region Foreign Keys
+
+    //Director -> Many to many
+    public List<Director> Directors { get; set; } = new();
+
+    //Actor -> Many to many
+    public List<Actor> Actors { get; set; } = new();
 
     public Film? Film { get; set; }
     public Serial? Serial { get; set; }
 
-    public List<Director> Directors { get; set; } = new List<Director>();
-
-    public List<Actor> Actors { get; set; } = new List<Actor>();
+    #endregion
 }
