@@ -9,10 +9,6 @@ public class User : IdentityUser<Guid>
 
     #region Foreign Keys
 
-    //UserRole -> Many to one
-    public Guid UserRoleId { get; set; }
-    public UserRole UserRole { get; set; }
-
     //RecommendationCollection -> One to many
     public List<RecommendationCollection> RecommendationCollections { get; set; } = new();
 

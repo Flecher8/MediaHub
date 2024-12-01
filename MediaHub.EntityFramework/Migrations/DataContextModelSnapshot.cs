@@ -17,18 +17,18 @@ namespace MediaHub.EntityFramework.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.10")
+                .HasAnnotation("ProductVersion", "9.0.0")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
             modelBuilder.Entity("ActorMovieInfo", b =>
                 {
-                    b.Property<string>("ActorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ActorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MovieInfoId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MovieInfoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ActorId", "MovieInfoId");
 
@@ -39,11 +39,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("AnimeStudioAnime", b =>
                 {
-                    b.Property<string>("AnimeId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("AnimeId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("AnimeStudioId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("AnimeStudioId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("AnimeId", "AnimeStudioId");
 
@@ -54,11 +54,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("DirectorMovieInfo", b =>
                 {
-                    b.Property<string>("DirectorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("DirectorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MovieInfoId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MovieInfoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("DirectorId", "MovieInfoId");
 
@@ -69,11 +69,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GameDeveloperGame", b =>
                 {
-                    b.Property<string>("GameDeveloperId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameDeveloperId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GameDeveloperId", "GameId");
 
@@ -84,11 +84,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GamePlatformGame", b =>
                 {
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GamePlatformId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GamePlatformId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GameId", "GamePlatformId");
 
@@ -99,11 +99,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GamePublisherGame", b =>
                 {
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GamePublisherId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GamePublisherId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GameId", "GamePublisherId");
 
@@ -114,11 +114,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GameTagGame", b =>
                 {
-                    b.Property<string>("GameId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GameTagId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameTagId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GameId", "GameTagId");
 
@@ -129,11 +129,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("MangaAuthorManga", b =>
                 {
-                    b.Property<string>("MangaAuthorId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MangaAuthorId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MangaId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MangaId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("MangaAuthorId", "MangaId");
 
@@ -144,11 +144,11 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("MediaContentGenre", b =>
                 {
-                    b.Property<string>("GenreId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MediaContentId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("GenreId", "MediaContentId");
 
@@ -157,32 +157,33 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("MediaContentGenre");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Actor", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Actor", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ActorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ActorId");
 
                     b.ToTable("Actors");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Anime", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Anime", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("AnimeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfEpisodes")
                         .ValueGeneratedOnAdd()
@@ -197,7 +198,7 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("AnimeId");
 
                     b.HasIndex("MediaContentId")
                         .IsUnique();
@@ -205,17 +206,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Animes");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.AnimeStudio", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.AnimeStudio", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("AnimeStudioId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("AnimeStudioId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -223,17 +225,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AnimeStudios");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.CollectionUserRole", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CollectionUserRoleId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("CollectionUserRoleId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -241,17 +244,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("CollectionUserRoles");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.ContentStatus", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.ContentStatus", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ContentStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("ContentStatusId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -259,32 +263,34 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("ContentStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Director", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Director", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("DirectorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("DirectorId");
 
                     b.ToTable("Directors");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Evaluation", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Evaluation", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("EvaluationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("EvaluationId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -292,20 +298,19 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Evaluations");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Film", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Film", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("FilmId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MovieInfoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MovieInfoId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("FilmId");
 
                     b.HasIndex("MediaContentId")
                         .IsUnique();
@@ -316,19 +321,19 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Films");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Game", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Game", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("EsrbRating")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("MetacriticRating")
                         .ValueGeneratedOnAdd()
@@ -340,7 +345,7 @@ namespace MediaHub.EntityFramework.Migrations
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.HasKey("Id");
+                    b.HasKey("GameId");
 
                     b.HasIndex("MediaContentId")
                         .IsUnique();
@@ -348,17 +353,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Games");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GameDeveloper", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GameDeveloper", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameDeveloperId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GameDeveloperId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -366,17 +372,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("GameDevelopers");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GamePlatform", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GamePlatform", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GamePlatformId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GamePlatformId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -384,17 +391,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("GamePlatforms");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GamePublisher", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GamePublisher", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GamePublisherId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GamePublisherId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -402,17 +410,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("GamePublishers");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GameTag", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GameTag", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GameTagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GameTagId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -420,17 +429,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("GameTags");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Genre", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Genre", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GenreId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("GenreId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -438,25 +448,24 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GenreEvaluation", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GenreEvaluation", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GenreEvaluationId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("GenreId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("GenreId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Points")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.Property<string>("RecommendationCollectionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RecommendationCollectionId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("GenreEvaluationId");
 
                     b.HasIndex("GenreId");
 
@@ -465,17 +474,17 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("GenreEvaluations");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Manga", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Manga", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MangaId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("EndDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfChapters")
                         .ValueGeneratedOnAdd()
@@ -495,7 +504,7 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
 
-                    b.HasKey("Id");
+                    b.HasKey("MangaId");
 
                     b.HasIndex("MediaContentId")
                         .IsUnique();
@@ -503,17 +512,18 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Mangas");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MangaAuthor", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MangaAuthor", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MangaAuthorId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("MangaAuthorId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -521,10 +531,11 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("MangaAuthors");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContent", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -535,9 +546,8 @@ namespace MediaHub.EntityFramework.Migrations
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.Property<string>("MediaContentTypeId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentTypeId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("Rating")
                         .ValueGeneratedOnAdd()
@@ -552,45 +562,46 @@ namespace MediaHub.EntityFramework.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.HasKey("Id");
+                    b.HasKey("MediaContentId");
 
                     b.HasIndex("MediaContentTypeId");
 
                     b.ToTable("MediaContents");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContentPicture", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContentPicture", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("PictureId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("PictureLink")
                         .IsRequired()
                         .HasMaxLength(500)
                         .HasColumnType("nvarchar(500)");
 
-                    b.HasKey("Id");
+                    b.HasKey("PictureId");
 
                     b.HasIndex("MediaContentId");
 
                     b.ToTable("MediaContentPictures");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContentType", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContentType", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("TypeId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.HasKey("Id");
+                    b.HasKey("TypeId");
 
                     b.HasIndex("Name")
                         .IsUnique();
@@ -598,27 +609,25 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("MediaContentTypes");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaInteractionStatus", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaInteractionStatus", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaInteractionStatusId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ContentStatusId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("ContentStatusId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("EvaluationId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid?>("EvaluationId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RecommendationCollectionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RecommendationCollectionId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("MediaInteractionStatusId");
 
                     b.HasIndex("ContentStatusId");
 
@@ -631,55 +640,54 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("MediaInteractionStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MovieInfo", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MovieInfo", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MovieInfoId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<double>("DurationInMinutes")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("float")
                         .HasDefaultValue(0.0);
 
-                    b.HasKey("Id");
+                    b.HasKey("MovieInfoId");
 
                     b.ToTable("MovieInfos");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollection", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.RecommendationCollection", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CollectionId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CreatorId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CreatorUserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("CollectionId");
 
-                    b.HasIndex("CreatorId");
+                    b.HasIndex("CreatorUserId");
 
                     b.ToTable("RecommendationCollections");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollectionUserAccess", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.RecommendationCollectionUserAccess", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserAccessId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("CollectionUserRoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("CollectionUserRoleId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RecommendationCollectionId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RecommendationCollectionId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.HasKey("Id");
+                    b.HasKey("UserAccessId");
 
                     b.HasIndex("CollectionUserRoleId");
 
@@ -690,45 +698,17 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("RecommendationCollectionUserAccesses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Role", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Serial", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("SerialId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<Guid>("MediaContentId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
-
-            modelBuilder.Entity("MediaHub.Models.Serial", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MediaContentId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("MovieInfoId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("MovieInfoId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("NumberOfEpisodes")
                         .ValueGeneratedOnAdd()
@@ -740,7 +720,7 @@ namespace MediaHub.EntityFramework.Migrations
                         .HasColumnType("int")
                         .HasDefaultValue(0);
 
-                    b.HasKey("Id");
+                    b.HasKey("SerialId");
 
                     b.HasIndex("MediaContentId")
                         .IsUnique();
@@ -751,10 +731,11 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("Serials");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.User", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.User", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
@@ -816,7 +797,35 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.UserRole", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+                });
+
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -830,9 +839,8 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RoleId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -841,7 +849,7 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AspNetRoleClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -855,9 +863,8 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<string>("ClaimValue")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("Id");
 
@@ -866,7 +873,7 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AspNetUserClaims", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -877,9 +884,8 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("LoginProvider", "ProviderKey");
 
@@ -888,13 +894,13 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AspNetUserLogins", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("RoleId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("RoleId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("UserId", "RoleId");
 
@@ -903,10 +909,10 @@ namespace MediaHub.EntityFramework.Migrations
                     b.ToTable("AspNetUserRoles", (string)null);
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<Guid>("UserId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("LoginProvider")
                         .HasColumnType("nvarchar(450)");
@@ -924,13 +930,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("ActorMovieInfo", b =>
                 {
-                    b.HasOne("MediaHub.Models.Actor", null)
+                    b.HasOne("MediaHub.Models.Entities.Actor", null)
                         .WithMany()
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MovieInfo", null)
+                    b.HasOne("MediaHub.Models.Entities.MovieInfo", null)
                         .WithMany()
                         .HasForeignKey("MovieInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -939,13 +945,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("AnimeStudioAnime", b =>
                 {
-                    b.HasOne("MediaHub.Models.Anime", null)
+                    b.HasOne("MediaHub.Models.Entities.Anime", null)
                         .WithMany()
                         .HasForeignKey("AnimeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.AnimeStudio", null)
+                    b.HasOne("MediaHub.Models.Entities.AnimeStudio", null)
                         .WithMany()
                         .HasForeignKey("AnimeStudioId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -954,13 +960,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("DirectorMovieInfo", b =>
                 {
-                    b.HasOne("MediaHub.Models.Director", null)
+                    b.HasOne("MediaHub.Models.Entities.Director", null)
                         .WithMany()
                         .HasForeignKey("DirectorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MovieInfo", null)
+                    b.HasOne("MediaHub.Models.Entities.MovieInfo", null)
                         .WithMany()
                         .HasForeignKey("MovieInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -969,13 +975,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GameDeveloperGame", b =>
                 {
-                    b.HasOne("MediaHub.Models.GameDeveloper", null)
+                    b.HasOne("MediaHub.Models.Entities.GameDeveloper", null)
                         .WithMany()
                         .HasForeignKey("GameDeveloperId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.Game", null)
+                    b.HasOne("MediaHub.Models.Entities.Game", null)
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -984,13 +990,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GamePlatformGame", b =>
                 {
-                    b.HasOne("MediaHub.Models.Game", null)
+                    b.HasOne("MediaHub.Models.Entities.Game", null)
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.GamePlatform", null)
+                    b.HasOne("MediaHub.Models.Entities.GamePlatform", null)
                         .WithMany()
                         .HasForeignKey("GamePlatformId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -999,13 +1005,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GamePublisherGame", b =>
                 {
-                    b.HasOne("MediaHub.Models.Game", null)
+                    b.HasOne("MediaHub.Models.Entities.Game", null)
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.GamePublisher", null)
+                    b.HasOne("MediaHub.Models.Entities.GamePublisher", null)
                         .WithMany()
                         .HasForeignKey("GamePublisherId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1014,13 +1020,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("GameTagGame", b =>
                 {
-                    b.HasOne("MediaHub.Models.Game", null)
+                    b.HasOne("MediaHub.Models.Entities.Game", null)
                         .WithMany()
                         .HasForeignKey("GameId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.GameTag", null)
+                    b.HasOne("MediaHub.Models.Entities.GameTag", null)
                         .WithMany()
                         .HasForeignKey("GameTagId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1029,13 +1035,13 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("MangaAuthorManga", b =>
                 {
-                    b.HasOne("MediaHub.Models.MangaAuthor", null)
+                    b.HasOne("MediaHub.Models.Entities.MangaAuthor", null)
                         .WithMany()
                         .HasForeignKey("MangaAuthorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.Manga", null)
+                    b.HasOne("MediaHub.Models.Entities.Manga", null)
                         .WithMany()
                         .HasForeignKey("MangaId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1044,41 +1050,41 @@ namespace MediaHub.EntityFramework.Migrations
 
             modelBuilder.Entity("MediaContentGenre", b =>
                 {
-                    b.HasOne("MediaHub.Models.Genre", null)
+                    b.HasOne("MediaHub.Models.Entities.Genre", null)
                         .WithMany()
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MediaContent", null)
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", null)
                         .WithMany()
                         .HasForeignKey("MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Anime", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Anime", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithOne("Anime")
-                        .HasForeignKey("MediaHub.Models.Anime", "MediaContentId")
+                        .HasForeignKey("MediaHub.Models.Entities.Anime", "MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Film", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Film", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithOne("Film")
-                        .HasForeignKey("MediaHub.Models.Film", "MediaContentId")
+                        .HasForeignKey("MediaHub.Models.Entities.Film", "MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MovieInfo", "MovieInfo")
+                    b.HasOne("MediaHub.Models.Entities.MovieInfo", "MovieInfo")
                         .WithOne("Film")
-                        .HasForeignKey("MediaHub.Models.Film", "MovieInfoId")
+                        .HasForeignKey("MediaHub.Models.Entities.Film", "MovieInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1087,26 +1093,26 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("MovieInfo");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Game", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Game", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithOne("Game")
-                        .HasForeignKey("MediaHub.Models.Game", "MediaContentId")
+                        .HasForeignKey("MediaHub.Models.Entities.Game", "MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.GenreEvaluation", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.GenreEvaluation", b =>
                 {
-                    b.HasOne("MediaHub.Models.Genre", "Genre")
+                    b.HasOne("MediaHub.Models.Entities.Genre", "Genre")
                         .WithMany("GenreEvaluations")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
+                    b.HasOne("MediaHub.Models.Entities.RecommendationCollection", "RecommendationCollection")
                         .WithMany("GenreEvaluations")
                         .HasForeignKey("RecommendationCollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1117,20 +1123,20 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("RecommendationCollection");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Manga", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Manga", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithOne("Manga")
-                        .HasForeignKey("MediaHub.Models.Manga", "MediaContentId")
+                        .HasForeignKey("MediaHub.Models.Entities.Manga", "MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContent", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContentType", "MediaContentType")
+                    b.HasOne("MediaHub.Models.Entities.MediaContentType", "MediaContentType")
                         .WithMany("MediaContents")
                         .HasForeignKey("MediaContentTypeId")
                         .OnDelete(DeleteBehavior.Restrict)
@@ -1139,9 +1145,9 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("MediaContentType");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContentPicture", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContentPicture", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithMany("MediaContentPictures")
                         .HasForeignKey("MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1150,26 +1156,26 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("MediaContent");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaInteractionStatus", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaInteractionStatus", b =>
                 {
-                    b.HasOne("MediaHub.Models.ContentStatus", "ContentStatus")
+                    b.HasOne("MediaHub.Models.Entities.ContentStatus", "ContentStatus")
                         .WithMany("MediaInteractionStatuses")
                         .HasForeignKey("ContentStatusId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.Evaluation", "Evaluation")
+                    b.HasOne("MediaHub.Models.Entities.Evaluation", "Evaluation")
                         .WithMany("MediaInteractionStatuses")
                         .HasForeignKey("EvaluationId")
                         .OnDelete(DeleteBehavior.SetNull);
 
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithMany("MediaInteractionStatuses")
                         .HasForeignKey("MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
+                    b.HasOne("MediaHub.Models.Entities.RecommendationCollection", "RecommendationCollection")
                         .WithMany("MediaInteractionStatus")
                         .HasForeignKey("RecommendationCollectionId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1184,32 +1190,32 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("RecommendationCollection");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollection", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.RecommendationCollection", b =>
                 {
-                    b.HasOne("MediaHub.Models.User", "Creator")
+                    b.HasOne("MediaHub.Models.Entities.User", "CreatorUser")
                         .WithMany("RecommendationCollections")
-                        .HasForeignKey("CreatorId")
+                        .HasForeignKey("CreatorUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Creator");
+                    b.Navigation("CreatorUser");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollectionUserAccess", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.RecommendationCollectionUserAccess", b =>
                 {
-                    b.HasOne("MediaHub.Models.CollectionUserRole", "CollectionUserRole")
+                    b.HasOne("MediaHub.Models.Entities.CollectionUserRole", "CollectionUserRole")
                         .WithMany("RecommendationCollectionUserAccesses")
                         .HasForeignKey("CollectionUserRoleId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.RecommendationCollection", "RecommendationCollection")
+                    b.HasOne("MediaHub.Models.Entities.RecommendationCollection", "RecommendationCollection")
                         .WithMany("RecommendationCollectionUserAccesses")
                         .HasForeignKey("RecommendationCollectionId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.User", "User")
+                    b.HasOne("MediaHub.Models.Entities.User", "User")
                         .WithMany("RecommendationCollectionUserAccess")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1222,17 +1228,17 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("User");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Serial", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Serial", b =>
                 {
-                    b.HasOne("MediaHub.Models.MediaContent", "MediaContent")
+                    b.HasOne("MediaHub.Models.Entities.MediaContent", "MediaContent")
                         .WithOne("Serial")
-                        .HasForeignKey("MediaHub.Models.Serial", "MediaContentId")
+                        .HasForeignKey("MediaHub.Models.Entities.Serial", "MediaContentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.MovieInfo", "MovieInfo")
+                    b.HasOne("MediaHub.Models.Entities.MovieInfo", "MovieInfo")
                         .WithOne("Serial")
-                        .HasForeignKey("MediaHub.Models.Serial", "MovieInfoId")
+                        .HasForeignKey("MediaHub.Models.Entities.Serial", "MovieInfoId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -1241,78 +1247,78 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("MovieInfo");
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<System.Guid>", b =>
                 {
-                    b.HasOne("MediaHub.Models.Role", null)
+                    b.HasOne("MediaHub.Models.Entities.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<System.Guid>", b =>
                 {
-                    b.HasOne("MediaHub.Models.User", null)
+                    b.HasOne("MediaHub.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<System.Guid>", b =>
                 {
-                    b.HasOne("MediaHub.Models.User", null)
+                    b.HasOne("MediaHub.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<System.Guid>", b =>
                 {
-                    b.HasOne("MediaHub.Models.Role", null)
+                    b.HasOne("MediaHub.Models.Entities.UserRole", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("MediaHub.Models.User", null)
+                    b.HasOne("MediaHub.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
+            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>
                 {
-                    b.HasOne("MediaHub.Models.User", null)
+                    b.HasOne("MediaHub.Models.Entities.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("MediaHub.Models.CollectionUserRole", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.CollectionUserRole", b =>
                 {
                     b.Navigation("RecommendationCollectionUserAccesses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.ContentStatus", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.ContentStatus", b =>
                 {
                     b.Navigation("MediaInteractionStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Evaluation", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Evaluation", b =>
                 {
                     b.Navigation("MediaInteractionStatuses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.Genre", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.Genre", b =>
                 {
                     b.Navigation("GenreEvaluations");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContent", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContent", b =>
                 {
                     b.Navigation("Anime");
 
@@ -1329,19 +1335,19 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("Serial");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MediaContentType", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MediaContentType", b =>
                 {
                     b.Navigation("MediaContents");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.MovieInfo", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.MovieInfo", b =>
                 {
                     b.Navigation("Film");
 
                     b.Navigation("Serial");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.RecommendationCollection", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.RecommendationCollection", b =>
                 {
                     b.Navigation("GenreEvaluations");
 
@@ -1350,7 +1356,7 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Navigation("RecommendationCollectionUserAccesses");
                 });
 
-            modelBuilder.Entity("MediaHub.Models.User", b =>
+            modelBuilder.Entity("MediaHub.Models.Entities.User", b =>
                 {
                     b.Navigation("RecommendationCollectionUserAccess");
 

@@ -29,4 +29,8 @@
     <ProjectReference Include="..\MediaHub.Models\MediaHub.Models.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>

@@ -8,8 +8,5 @@ public class UserRole : IdentityRole<Guid>
 
     #region Foreign Keys
 
-    //User -> One to many
-    public List<User> Users { get; set; } = new();
-
     #endregion
 }
