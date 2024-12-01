@@ -52,6 +52,7 @@ namespace MediaHub.API
 
             // Services
             builder.Services.AddScoped<IGamePlatformsService, GamePlatformsService>();
+            builder.Services.AddScoped<IGameDevelopersService, GameDevelopersService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
