@@ -8,6 +8,8 @@ public class RecommendationCollection
     [Key]
     public Guid CollectionId { get; set; } = Guid.NewGuid();
 
+    public required string Name { get; set; }
+
     #region Foreign Keys
 
     //User -> Many to one

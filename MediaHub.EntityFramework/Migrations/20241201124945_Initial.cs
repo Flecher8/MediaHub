@@ -329,6 +329,7 @@ namespace MediaHub.EntityFramework.Migrations
                 columns: table => new
                 {
                     CollectionId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     CreatorUserId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>

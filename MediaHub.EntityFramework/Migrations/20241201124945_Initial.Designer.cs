@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace MediaHub.EntityFramework.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20241201123755_Initial")]
+    [Migration("20241201124945_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -667,6 +667,11 @@ namespace MediaHub.EntityFramework.Migrations
 
                     b.Property<Guid>("CreatorUserId")
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.HasKey("CollectionId");
 

@@ -289,6 +289,10 @@ namespace MediaHub.EntityFramework
             {
                 entity.HasKey(rc => rc.CollectionId);
 
+                entity.Property(rc => rc.Name)
+                      .IsRequired()
+                      .HasMaxLength(200);
+
                 entity.HasOne(rc => rc.CreatorUser)
                       .WithMany(u => u.RecommendationCollections)
                       .HasForeignKey(rc => rc.CreatorUserId)

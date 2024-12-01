@@ -665,6 +665,11 @@ namespace MediaHub.EntityFramework.Migrations
                     b.Property<Guid>("CreatorUserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
+
                     b.HasKey("CollectionId");
 
                     b.HasIndex("CreatorUserId");
