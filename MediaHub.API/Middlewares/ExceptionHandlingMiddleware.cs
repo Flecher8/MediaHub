@@ -1,4 +1,6 @@
-﻿namespace MediaHub.API.Middlewares;
+﻿using System.Text.Json;
+
+namespace MediaHub.API.Middlewares;
 
 public class ExceptionHandlingMiddleware
 {
@@ -25,8 +27,43 @@ public class ExceptionHandlingMiddleware
 
     private Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-        context.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        int statusCode = 500;
+        string message = string.Empty;
 
-        return context.Response.WriteAsync(exception.Message);
+        switch (exception)
+        {
+            case KeyNotFoundException:
+                statusCode = StatusCodes.Status404NotFound;
+                message = exception.Message ?? "Resource not found.";
+                break;
+            case ArgumentException:
+                statusCode = StatusCodes.Status400BadRequest;
+                message = exception.Message ?? "Invalid argument.";
+                break;
+            default:
+                statusCode = StatusCodes.Status500InternalServerError;
+                message = "An unexpected error occurred. Please try again later.";
+                break;
+        }
+
+        // Log detailed information
+        _logger.LogError(exception, "An error occurred while processing the request. " +
+                                    "Request Path: {Path}, Method: {Method}, QueryString: {QueryString}",
+                                    context.Request.Path,
+                                    context.Request.Method,
+                                    context.Request.QueryString);
+
+        context.Response.ContentType = "application/json";
+        context.Response.StatusCode = statusCode;
+
+        var errorResponse = new
+        {
+            StatusCode = statusCode,
+            Message = message,
+            Details = exception.Message ?? "No additional details available."
+        };
+
+        // Serialize the response to JSON
+        return context.Response.WriteAsync(JsonSerializer.Serialize(errorResponse));
     }
 }

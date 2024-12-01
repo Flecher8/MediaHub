@@ -19,7 +19,7 @@ public abstract class BaseRepository<T> : IDataRepository<T> where T : class
         return item;
     }
 
-    public virtual async Task DeleteAsync(string id)
+    public virtual async Task DeleteAsync(Guid id)
     {
         var entity = await _dbContext.Set<T>().FindAsync(id);
         if (entity != null)
@@ -34,7 +34,7 @@ public abstract class BaseRepository<T> : IDataRepository<T> where T : class
         return await _dbContext.Set<T>().ToListAsync();
     }
 
-    public virtual async Task<T?> GetByIdAsync(string id)
+    public virtual async Task<T?> GetByIdAsync(Guid id)
     {
         return await _dbContext.Set<T>().FindAsync(id);
     }

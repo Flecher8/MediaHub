@@ -7,6 +7,9 @@ using MediaHub.EntityFramework.Repositories;
 using MediaHub.EntityFramework.Abstract.IRepositories;
 using MediaHub.API.Middlewares;
 using MediaHub.Models.Entities;
+using MediaHub.Core.Mapping;
+using MediaHub.Core.Services.Abstract;
+using MediaHub.Core.Services;
 
 namespace MediaHub.API
 {
@@ -47,6 +50,9 @@ namespace MediaHub.API
             builder.Services.AddScoped<ISerialRepository, SerialRepository>();
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
+            // Services
+            builder.Services.AddScoped<IGamePlatformsService, GamePlatformsService>();
+
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
             builder.Services.AddEndpointsApiExplorer();
@@ -67,6 +73,8 @@ namespace MediaHub.API
 
                 option.OperationFilter<SecurityRequirementsOperationFilter>();
             });
+
+            builder.Services.AddAutoMapper(typeof(AutoMapperProfile));
 
             //builder.Services.AddDbContext<DataContext>(options => {
             //    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
