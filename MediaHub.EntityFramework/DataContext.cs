@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore;
 
 namespace MediaHub.EntityFramework
 {
-    public class DataContext : IdentityDbContext<User, Role, string>
+    public class DataContext : IdentityDbContext<User, UserRole, Guid>
     {
         public DataContext() { }
 
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public override DbSet<User> Users { get; set; }
-        public override DbSet<Role> Roles { get; set; }
+        public override DbSet<UserRole> Roles { get; set; }
         public DbSet<CollectionUserRole> CollectionUserRoles { get; set; }
         public DbSet<ContentStatus> ContentStatuses { get; set; }
         public DbSet<Evaluation> Evaluations { get; set; }
@@ -45,7 +45,7 @@ namespace MediaHub.EntityFramework
             // Configure CollectionUserRole entity
             modelBuilder.Entity<CollectionUserRole>(entity =>
             {
-                entity.HasKey(cr => cr.Id);
+                entity.HasKey(cr => cr.CollectionUserRoleId);
 
                 entity.Property(cr => cr.Name)
                       .IsRequired()
@@ -65,7 +65,7 @@ namespace MediaHub.EntityFramework
             // Configure ContentStatus entity
             modelBuilder.Entity<ContentStatus>(entity =>
             {
-                entity.HasKey(cs => cs.Id);
+                entity.HasKey(cs => cs.ContentStatusId);
 
                 entity.Property(cs => cs.Name)
                       .IsRequired()
@@ -86,7 +86,7 @@ namespace MediaHub.EntityFramework
             // Configure Evaluation entity
             modelBuilder.Entity<Evaluation>(entity =>
             {
-                entity.HasKey(ev => ev.Id);
+                entity.HasKey(ev => ev.EvaluationId);
 
                 entity.Property(ev => ev.Name)
                       .IsRequired()
@@ -107,7 +107,7 @@ namespace MediaHub.EntityFramework
             // Configure Genre entity
             modelBuilder.Entity<Genre>(entity =>
             {
-                entity.HasKey(g => g.Id);
+                entity.HasKey(g => g.GenreId);
 
                 entity.Property(g => g.Name)
                       .IsRequired()
@@ -127,7 +127,7 @@ namespace MediaHub.EntityFramework
             // Configure GenreEvaluation entity
             modelBuilder.Entity<GenreEvaluation>(entity =>
             {
-                entity.HasKey(ge => ge.Id);
+                entity.HasKey(ge => ge.GenreEvaluationId);
 
                 entity.HasOne(ge => ge.RecommendationCollection)
                       .WithMany(rc => rc.GenreEvaluations)
@@ -145,7 +145,7 @@ namespace MediaHub.EntityFramework
             // Configure MediaContent entity
             modelBuilder.Entity<MediaContent>(entity =>
             {
-                entity.HasKey(mc => mc.Id);
+                entity.HasKey(mc => mc.MediaContentId);
 
                 entity.Property(mc => mc.Title).IsRequired().HasMaxLength(200);
 
@@ -217,7 +217,7 @@ namespace MediaHub.EntityFramework
             // Configure MediaContentPicture entity
             modelBuilder.Entity<MediaContentPicture>(entity =>
             {
-                entity.HasKey(mcp => mcp.Id);
+                entity.HasKey(mcp => mcp.PictureId);
 
                 entity.Property(mcp => mcp.PictureLink).IsRequired().HasMaxLength(500);
 
@@ -232,7 +232,7 @@ namespace MediaHub.EntityFramework
             modelBuilder.Entity<MediaContentType>(entity =>
             {
                 // Primary Key
-                entity.HasKey(mct => mct.Id);
+                entity.HasKey(mct => mct.TypeId);
 
                 // Property Configuration
                 entity.Property(mct => mct.Name)
@@ -256,7 +256,7 @@ namespace MediaHub.EntityFramework
             modelBuilder.Entity<MediaInteractionStatus>(entity =>
             {
                 // Primary Key
-                entity.HasKey(mis => mis.Id);
+                entity.HasKey(mis => mis.MediaInteractionStatusId);
 
                 entity.HasOne(mis => mis.MediaContent)
                       .WithMany(mc => mc.MediaInteractionStatuses)
@@ -287,15 +287,15 @@ namespace MediaHub.EntityFramework
             // Configure RecommendationCollection entity
             modelBuilder.Entity<RecommendationCollection>(entity =>
             {
-                entity.HasKey(rc => rc.Id);
+                entity.HasKey(rc => rc.CollectionId);
 
                 entity.Property(rc => rc.Name)
                       .IsRequired()
                       .HasMaxLength(200);
 
-                entity.HasOne(rc => rc.Creator)
+                entity.HasOne(rc => rc.CreatorUser)
                       .WithMany(u => u.RecommendationCollections)
-                      .HasForeignKey(rc => rc.CreatorId)
+                      .HasForeignKey(rc => rc.CreatorUserId)
                       .IsRequired()
                       .OnDelete(DeleteBehavior.Cascade);
 
@@ -321,7 +321,7 @@ namespace MediaHub.EntityFramework
             // Configure RecommendationCollectionUserAccess entity
             modelBuilder.Entity<RecommendationCollectionUserAccess>(entity =>
             {
-                entity.HasKey(rcua => rcua.Id);
+                entity.HasKey(rcua => rcua.UserAccessId);
 
                 entity.HasOne(rcua => rcua.User)
                       .WithMany(u => u.RecommendationCollectionUserAccess)
@@ -346,7 +346,7 @@ namespace MediaHub.EntityFramework
             // Configure Film entity
             modelBuilder.Entity<Film>(entity =>
             {
-                entity.HasKey(f => f.Id);
+                entity.HasKey(f => f.FilmId);
 
                 entity.HasOne(f => f.MediaContent)
                       .WithOne(mc => mc.Film)
@@ -366,7 +366,7 @@ namespace MediaHub.EntityFramework
             modelBuilder.Entity<Serial>(entity =>
             {
                 // Primary Key
-                entity.HasKey(s => s.Id);
+                entity.HasKey(s => s.SerialId);
 
                 entity.HasOne(s => s.MediaContent)
                       .WithOne(mc => mc.Serial)
@@ -393,7 +393,7 @@ namespace MediaHub.EntityFramework
             // Configure MovieInfo entity
             modelBuilder.Entity<MovieInfo>(entity =>
             {
-                entity.HasKey(mi => mi.Id);
+                entity.HasKey(mi => mi.MovieInfoId);
                 entity.Property(mi => mi.DurationInMinutes).HasDefaultValue(0);
 
                 entity.HasOne(mi => mi.Film)
@@ -438,7 +438,7 @@ namespace MediaHub.EntityFramework
             // Configure Director entity
             modelBuilder.Entity<Director>(entity =>
             {
-                entity.HasKey(d => d.Id);
+                entity.HasKey(d => d.DirectorId);
 
                 entity.Property(d => d.Name)
                       .IsRequired()
@@ -449,7 +449,7 @@ namespace MediaHub.EntityFramework
             // Configure Actor entity
             modelBuilder.Entity<Actor>(entity =>
             {
-                entity.HasKey(a => a.Id);
+                entity.HasKey(a => a.ActorId);
 
                 entity.Property(a => a.Name)
                       .IsRequired()
@@ -459,7 +459,7 @@ namespace MediaHub.EntityFramework
             // Configure Game entity
             modelBuilder.Entity<Game>(entity =>
             {
-                entity.HasKey(g => g.Id);
+                entity.HasKey(g => g.GameId);
 
                 entity.Property(g => g.MetacriticRating).HasDefaultValue(0);
 
@@ -533,7 +533,7 @@ namespace MediaHub.EntityFramework
             // Configure GamePlatform entity
             modelBuilder.Entity<GamePlatform>(entity =>
             {
-                entity.HasKey(gp => gp.Id);
+                entity.HasKey(gp => gp.GamePlatformId);
 
                 entity.Property(gp => gp.Name).IsRequired().HasMaxLength(100);
 
@@ -543,7 +543,7 @@ namespace MediaHub.EntityFramework
             // Configure GameDeveloper entity
             modelBuilder.Entity<GameDeveloper>(entity =>
             {
-                entity.HasKey(gd => gd.Id);
+                entity.HasKey(gd => gd.GameDeveloperId);
 
                 entity.Property(gd => gd.Name).IsRequired().HasMaxLength(100);
 
@@ -553,7 +553,7 @@ namespace MediaHub.EntityFramework
             // Configure GamePublisher entity
             modelBuilder.Entity<GamePublisher>(entity =>
             {
-                entity.HasKey(gp => gp.Id);
+                entity.HasKey(gp => gp.GamePublisherId);
 
                 entity.Property(gp => gp.Name).IsRequired().HasMaxLength(100);
 
@@ -564,7 +564,7 @@ namespace MediaHub.EntityFramework
             // Configure GameTag entity
             modelBuilder.Entity<GameTag>(entity =>
             {
-                entity.HasKey(gt => gt.Id);
+                entity.HasKey(gt => gt.GameTagId);
 
                 entity.Property(gt => gt.Name).IsRequired().HasMaxLength(100);
 
@@ -574,7 +574,7 @@ namespace MediaHub.EntityFramework
             // Configure Anime entity
             modelBuilder.Entity<Anime>(entity =>
             {
-                entity.HasKey(a => a.Id);
+                entity.HasKey(a => a.AnimeId);
 
                 entity.Property(a => a.Rank)
                       .HasDefaultValue(0);
@@ -613,7 +613,7 @@ namespace MediaHub.EntityFramework
             // Configure AnimeStudio entity
             modelBuilder.Entity<AnimeStudio>(entity =>
             {
-                entity.HasKey(studio => studio.Id);
+                entity.HasKey(studio => studio.AnimeStudioId);
 
                 entity.Property(studio => studio.Name).IsRequired().HasMaxLength(100);
 
@@ -623,7 +623,7 @@ namespace MediaHub.EntityFramework
             // Configure Manga entity
             modelBuilder.Entity<Manga>(entity =>
             {
-                entity.HasKey(m => m.Id);
+                entity.HasKey(m => m.MangaId);
 
                 entity.Property(m => m.Rank)
                       .HasDefaultValue(0);
@@ -664,7 +664,7 @@ namespace MediaHub.EntityFramework
             // Configure MangaAuthor entity
             modelBuilder.Entity<MangaAuthor>(entity =>
             {
-                entity.HasKey(ma => ma.Id);
+                entity.HasKey(ma => ma.MangaAuthorId);
                 entity.Property(ma => ma.Name).IsRequired().HasMaxLength(100);
 
                 entity.HasIndex(ma => ma.Name).IsUnique();

@@ -25,9 +25,8 @@ public class ExceptionHandlingMiddleware
 
     private Task HandleExceptionAsync(HttpContext context, Exception exception)
     {
-
         context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-     
+
         return context.Response.WriteAsync(exception.Message);
     }
 }

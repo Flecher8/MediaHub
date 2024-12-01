@@ -1,22 +1,35 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace MediaHub.Models.Entities;
+
 public class MediaContent
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    [Key]
+    public Guid MediaContentId { get; set; } = Guid.NewGuid();
+
+    #region Params
+
     public required string Title { get; set; }
     public string Description { get; set; } = string.Empty;
     public double Rating { get; set; } = 0;
     public DateTime ReleaseDate { get; set; }
     public string? MainPictureLink { get; set; }
-    public List<MediaInteractionStatus> MediaInteractionStatuses { get; set; } = new List<MediaInteractionStatus>();
-    public List<MediaContentPicture> MediaContentPictures { get; set; } = new List<MediaContentPicture>();
 
-    public required string MediaContentTypeId { get; set; }
+    #endregion
+
+    #region Foreign Keys
+
+    //MediaInteractionStatus -> Many to one
+    public List<MediaInteractionStatus> MediaInteractionStatuses { get; set; } = new();
+
+    //MediaContentPicture -> Many to one
+    public List<MediaContentPicture> MediaContentPictures { get; set; } = new();
+
+    //Genre -> Many to many
+    public List<Genre> Genres { get; set; } = new();
+
+    //MediaContentType -> One to many
+    public required Guid MediaContentTypeId { get; set; }
     public MediaContentType MediaContentType { get; set; }
 
     public Film? Film { get; set; }
@@ -25,5 +38,5 @@ public class MediaContent
     public Anime? Anime { get; set; }
     public Manga? Manga { get; set; }
 
-    public List<Genre> Genres { get; set; } = new List<Genre>();
+    #endregion
 }

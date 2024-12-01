@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class MediaContentType
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid TypeId { get; set; } = Guid.NewGuid();
+
     public required string Name { get; set; }
-    public List<MediaContent> MediaContents { get; set; } = new List<MediaContent>();
+
+    #region Foreign Keys
+
+    //MediaContent -> Many to one
+    public List<MediaContent> MediaContents { get; set; } = new();
+
+    #endregion
 }

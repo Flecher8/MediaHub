@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 
 namespace MediaHub.EntityFramework.Abstract;
+
 // A base repository class that supports filtering and dynamic includes for any entity type
 public abstract class BaseFilterableRepository<T> : BaseRepository<T>, IFilterableRepository<T>
     where T : class
 {
     // An instance of the generic filter builder.
-    protected readonly BaseFilterBuilder<T> _filterBuilder;
+    private readonly BaseFilterBuilder<T> _filterBuilder;
 
     // Constructor accepting the database context and initializing the filter builder.
     public BaseFilterableRepository(DataContext dbContext, BaseFilterBuilder<T> filterBuilder) : base(dbContext)
@@ -40,7 +36,7 @@ public abstract class BaseFilterableRepository<T> : BaseRepository<T>, IFilterab
             .ToListAsync();
     }
 
-    // Method to apply include expressions to the query dynamically.
+    // Method to apply including expressions to the query dynamically.
     protected virtual IQueryable<T> IncludeEntities(IQueryable<T> query)
     {
         // Iterate through all include expressions and apply them to the query.

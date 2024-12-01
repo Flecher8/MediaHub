@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class Director
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid DirectorId { get; set; } = Guid.NewGuid();
+
     public required string Name { get; set; }
 
-    public List<MovieInfo> MovieInfos { get; set; } = new List<MovieInfo>();
+    #region Foreign Keys
+
+    //MovieInfo -> Many to many
+    public List<MovieInfo> MovieInfos { get; set; } = new();
+
+    #endregion
 }

@@ -1,15 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Identity;
 
-namespace MediaHub.Models.Entities
+namespace MediaHub.Models.Entities;
+
+[Serializable]
+public class User : IdentityUser<Guid>
 {
-    public class User : IdentityUser
-    {
-        public List<RecommendationCollection> RecommendationCollections { get; set; } = new List<RecommendationCollection>();
-        public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccess { get; set; } = new List<RecommendationCollectionUserAccess>();
-    }
+    //PK: public Guid Id { get; set; }
+
+    #region Foreign Keys
+
+    //RecommendationCollection -> One to many
+    public List<RecommendationCollection> RecommendationCollections { get; set; } = new();
+
+    //RecommendationCollectionUserAccess -> One to many
+    public List<RecommendationCollectionUserAccess> RecommendationCollectionUserAccess { get; set; } = new();
+
+    #endregion
 }

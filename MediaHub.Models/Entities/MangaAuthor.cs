@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace MediaHub.Models.Entities;
 
-namespace MediaHub.Models.Entities;
 public class MangaAuthor
 {
-    public string Id { get; set; } = Guid.NewGuid().ToString();
+    public Guid MangaAuthorId { get; set; } = Guid.NewGuid();
+
     public required string Name { get; set; }
 
-    public List<Manga> Mangas { get; set; } = new List<Manga>();
+    #region Foreign Keys
+
+    //Manga -> Many to many
+    public List<Manga> Mangas { get; set; } = new();
+
+    #endregion
 }
