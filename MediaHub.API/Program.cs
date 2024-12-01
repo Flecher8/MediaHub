@@ -33,6 +33,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IFilmRepository, FilmRepository>();
             builder.Services.AddScoped<IGameDeveloperRepository, GameDeveloperRepository>();
             builder.Services.AddScoped<IGamePlatformRepository, GamePlatformRepository>();
+            builder.Services.AddScoped<IGamePublisherRepository, GamePublisherRepository>();
             builder.Services.AddScoped<IGameRepository, GameRepository>();
             builder.Services.AddScoped<IGameTagRepository, GameTagRepository>();
             builder.Services.AddScoped<IGenreEvaluationRepository, GenreEvaluationRepository>();
@@ -53,6 +54,7 @@ namespace MediaHub.API
             // Services
             builder.Services.AddScoped<IGamePlatformsService, GamePlatformsService>();
             builder.Services.AddScoped<IGameDevelopersService, GameDevelopersService>();
+            builder.Services.AddScoped<IGamePublishersService, GamePublishersService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
