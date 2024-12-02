@@ -4,6 +4,7 @@ using MediaHub.Models.Dtos.GameDeveloperDtos;
 using MediaHub.Models.Dtos.GamePlatformDtos;
 using MediaHub.Models.Dtos.GamePublisherDtos;
 using MediaHub.Models.Dtos.GameTagDtos;
+using MediaHub.Models.Dtos.MangaAuthorDtos;
 using MediaHub.Models.Entities;
 
 namespace MediaHub.Core.Mapping
@@ -36,6 +37,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateAnimeStudioDto, AnimeStudio>();
             CreateMap<UpdateAnimeStudioDto, AnimeStudio>();
             CreateMap<AnimeStudio, AnimeStudioDto>();
+
+            // MangaAuthor mappings
+            CreateMap<CreateMangaAuthorDto, MangaAuthor>();
+            CreateMap<UpdateMangaAuthorDto, MangaAuthor>();
+            CreateMap<MangaAuthor, MangaAuthorDto>();
         }
     }
 }
