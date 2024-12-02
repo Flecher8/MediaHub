@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediaHub.Models.Dtos.AnimeStudioDtos;
+using MediaHub.Models.Dtos.DirectorDtos;
 using MediaHub.Models.Dtos.GameDeveloperDtos;
 using MediaHub.Models.Dtos.GamePlatformDtos;
 using MediaHub.Models.Dtos.GamePublisherDtos;
@@ -42,6 +43,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateMangaAuthorDto, MangaAuthor>();
             CreateMap<UpdateMangaAuthorDto, MangaAuthor>();
             CreateMap<MangaAuthor, MangaAuthorDto>();
+
+            // Director mappings
+            CreateMap<CreateDirectorDto, Director>();
+            CreateMap<UpdateDirectorDto, Director>();
+            CreateMap<Director, DirectorDto>();
         }
     }
 }
