@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediaHub.Models.Dtos.ActorDtos;
 using MediaHub.Models.Dtos.AnimeStudioDtos;
 using MediaHub.Models.Dtos.DirectorDtos;
 using MediaHub.Models.Dtos.GameDeveloperDtos;
@@ -48,6 +49,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateDirectorDto, Director>();
             CreateMap<UpdateDirectorDto, Director>();
             CreateMap<Director, DirectorDto>();
+
+            // Actor mappings
+            CreateMap<CreateActorDto, Actor>();
+            CreateMap<UpdateActorDto, Actor>();
+            CreateMap<Actor, ActorDto>();
         }
     }
 }

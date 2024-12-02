@@ -52,6 +52,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IUserRepository, UserRepository>();
 
             // Services
+            builder.Services.AddScoped<IActorsService, ActorsService>();
             builder.Services.AddScoped<IAnimeStudiosService, AnimeStudiosService>();
             builder.Services.AddScoped<IDirectorsService, DirectorsService>();
             builder.Services.AddScoped<IGameDevelopersService, GameDevelopersService>();
