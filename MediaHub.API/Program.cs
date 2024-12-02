@@ -10,6 +10,7 @@ using MediaHub.Models.Entities;
 using MediaHub.Core.Mapping;
 using MediaHub.Core.Services.Abstract;
 using MediaHub.Core.Services;
+using MediaHub.EntityFramework.Seeding;
 
 namespace MediaHub.API
 {
@@ -109,6 +110,18 @@ namespace MediaHub.API
 
             // Add your middleware
             app.UseMiddleware<ExceptionHandlingMiddleware>();
+
+            // Database seeding logic
+            using (var scope = app.Services.CreateScope())
+            {
+                var context = scope.ServiceProvider.GetRequiredService<DataContext>();
+
+                // Apply pending migrations if any
+                //context.Database.Migrate();
+
+                // Call the seeder to populate the database
+                DbSeeder.Seed(context);
+            }
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
