@@ -7,6 +7,7 @@ using MediaHub.Models.Dtos.GamePlatformDtos;
 using MediaHub.Models.Dtos.GamePublisherDtos;
 using MediaHub.Models.Dtos.GameTagDtos;
 using MediaHub.Models.Dtos.MangaAuthorDtos;
+using MediaHub.Models.Dtos.MediaContentTypeDtos;
 using MediaHub.Models.Entities;
 
 namespace MediaHub.Core.Mapping
@@ -54,6 +55,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateActorDto, Actor>();
             CreateMap<UpdateActorDto, Actor>();
             CreateMap<Actor, ActorDto>();
+
+            // MediaContentType mappings
+            CreateMap<CreateMediaContentTypeDto, MediaContentType>();
+            CreateMap<UpdateMediaContentTypeDto, MediaContentType>();
+            CreateMap<MediaContentType, MediaContentTypeDto>();
         }
     }
 }
