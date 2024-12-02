@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediaHub.Models.Dtos.ActorDtos;
 using MediaHub.Models.Dtos.AnimeStudioDtos;
+using MediaHub.Models.Dtos.ContentStatusDtos;
 using MediaHub.Models.Dtos.DirectorDtos;
 using MediaHub.Models.Dtos.GameDeveloperDtos;
 using MediaHub.Models.Dtos.GamePlatformDtos;
@@ -60,6 +61,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateMediaContentTypeDto, MediaContentType>();
             CreateMap<UpdateMediaContentTypeDto, MediaContentType>();
             CreateMap<MediaContentType, MediaContentTypeDto>();
+
+            // ContentStatus mappings
+            CreateMap<CreateContentStatusDto, ContentStatus>();
+            CreateMap<UpdateContentStatusDto, ContentStatus>();
+            CreateMap<ContentStatus, ContentStatusDto>();
         }
     }
 }
