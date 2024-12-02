@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MediaHub.Models.Dtos.AnimeStudioDtos;
 using MediaHub.Models.Dtos.GameDeveloperDtos;
 using MediaHub.Models.Dtos.GamePlatformDtos;
 using MediaHub.Models.Dtos.GamePublisherDtos;
@@ -30,6 +31,11 @@ namespace MediaHub.Core.Mapping
             CreateMap<CreateGameTagDto, GameTag>();
             CreateMap<UpdateGameTagDto, GameTag>();
             CreateMap<GameTag, GameTagDto>();
+
+            // AnimeStudio mappings
+            CreateMap<CreateAnimeStudioDto, AnimeStudio>();
+            CreateMap<UpdateAnimeStudioDto, AnimeStudio>();
+            CreateMap<AnimeStudio, AnimeStudioDto>();
         }
     }
 }
