@@ -157,6 +157,8 @@ namespace MediaHub.EntityFramework
 
                 entity.Property(mc => mc.MainPictureLink).HasMaxLength(500);
 
+                entity.HasIndex(mc => mc.Title).IsUnique();
+
                 entity.HasMany(mc => mc.MediaInteractionStatuses)
                       .WithOne(mis => mis.MediaContent)
                       .HasForeignKey(mis => mis.MediaContentId)
