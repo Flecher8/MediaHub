@@ -70,6 +70,13 @@ namespace MediaHub.API
             builder.Services.AddSwaggerGen();
             builder.Services.AddIdentityApiEndpoints<User>()
                 .AddEntityFrameworkStores<DataContext>();
+
+            builder.Services.ConfigureApplicationCookie(options =>
+            {
+                options.ExpireTimeSpan = TimeSpan.FromDays(30);
+                options.SlidingExpiration = true;
+            });
+
             builder.Services.AddEndpointsApiExplorer();
 
             builder.Services.AddSwaggerGen(option =>
