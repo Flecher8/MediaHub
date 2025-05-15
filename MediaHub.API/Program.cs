@@ -63,6 +63,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IGameTagsService, GameTagsService>();
             builder.Services.AddScoped<IMangaAuthorsService, MangaAuthorsService>();
             builder.Services.AddScoped<IMediaContentTypesService, MediaContentTypesService>();
+            builder.Services.AddScoped<IUsersService, UsersService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -138,16 +139,16 @@ namespace MediaHub.API
                 app.UseSwaggerUI();
             }
 
-            app.MapIdentityApi<User>();
+            app.UseCors("AllowAllHeaders");
 
             app.UseHttpsRedirection();
 
+            app.UseAuthentication();
             app.UseAuthorization();
 
-
+            app.MapIdentityApi<User>();
             app.MapControllers();
             // Cors
-            app.UseCors("AllowAllHeaders");
 
             app.Run();
         }
