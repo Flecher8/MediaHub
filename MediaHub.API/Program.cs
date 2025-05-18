@@ -11,6 +11,7 @@ using MediaHub.Core.Mapping;
 using MediaHub.Core.Services.Abstract;
 using MediaHub.Core.Services;
 using MediaHub.EntityFramework.Seeding;
+using Microsoft.Extensions.Options;
 
 namespace MediaHub.API
 {
@@ -54,6 +55,7 @@ namespace MediaHub.API
 
             // Services
             builder.Services.AddScoped<IActorsService, ActorsService>();
+            builder.Services.AddScoped<IAnimeImportService, AnimeImportService>();
             builder.Services.AddScoped<IAnimeStudiosService, AnimeStudiosService>();
             builder.Services.AddScoped<IContentStatusesService, ContentStatusesService>();
             builder.Services.AddScoped<IDirectorsService, DirectorsService>();
@@ -64,6 +66,13 @@ namespace MediaHub.API
             builder.Services.AddScoped<IMangaAuthorsService, MangaAuthorsService>();
             builder.Services.AddScoped<IMediaContentTypesService, MediaContentTypesService>();
             builder.Services.AddScoped<IUsersService, UsersService>();
+
+            // Import services
+            builder.Services.AddScoped<IAnimeImportService, AnimeImportService>();
+            builder.Services.AddScoped<IGameImportService, GameImportService>();
+            builder.Services.AddScoped<IMangaImportService, MangaImportService>();
+            builder.Services.AddScoped<IFilmImportService, FilmImportService>();
+            builder.Services.AddScoped<ISerialImportService, SerialImportService>();
 
             builder.Services.AddControllers();
             // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -139,6 +148,7 @@ namespace MediaHub.API
                 app.UseSwaggerUI();
             }
 
+            // Cors
             app.UseCors("AllowAllHeaders");
 
             app.UseHttpsRedirection();
@@ -148,7 +158,7 @@ namespace MediaHub.API
 
             app.MapIdentityApi<User>();
             app.MapControllers();
-            // Cors
+
 
             app.Run();
         }

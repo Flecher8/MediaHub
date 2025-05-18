@@ -361,3 +361,10 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Data load json
+MediaHub.API/Data/anime.json
+MediaHub.API/Data/films.json
+MediaHub.API/Data/games.json
+MediaHub.API/Data/manga.json
+MediaHub.API/Data/serials.json

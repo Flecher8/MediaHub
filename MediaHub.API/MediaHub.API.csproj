@@ -24,13 +24,17 @@
     <PackageReference Include="Microsoft.Extensions.Identity.Core" Version="9.0.0" />
     <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="9.0.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="6.9.0" />
-    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="8.0.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\MediaHub.Core\MediaHub.Core.csproj" />
     <ProjectReference Include="..\MediaHub.EntityFramework\MediaHub.EntityFramework.csproj" />
     <ProjectReference Include="..\MediaHub.Helpers\MediaHub.Helpers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Data\" />
   </ItemGroup>
 
 </Project>

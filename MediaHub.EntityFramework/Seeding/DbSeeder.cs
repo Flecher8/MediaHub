@@ -7,6 +7,7 @@ public static class DbSeeder
     {
         SeedMediaContentTypes(context);
         SeedContentStatuses(context);
+        SeedGenres(context);
         // Add other seeding methods here for additional tables if needed
     }
 
@@ -97,5 +98,53 @@ public static class DbSeeder
         {
             context.SaveChanges();
         }
+    }
+
+    private static void SeedGenres(DataContext context)
+    {
+        var predefinedGenres = new List<Genre>
+        {
+            new Genre { Name = "Action" },
+            new Genre { Name = "Adventure" },
+            new Genre { Name = "Animation" },
+            new Genre { Name = "Comedy" },
+            new Genre { Name = "Crime" },
+            new Genre { Name = "Documentary" },
+            new Genre { Name = "Drama" },
+            new Genre { Name = "Educational" },
+            new Genre { Name = "Family" },
+            new Genre { Name = "Fantasy" },
+            new Genre { Name = "History" },
+            new Genre { Name = "Horror" },
+            new Genre { Name = "Kids" },
+            new Genre { Name = "Music" },
+            new Genre { Name = "Mystery" },
+            new Genre { Name = "Romance" },
+            new Genre { Name = "Sci-Fi" },
+            new Genre { Name = "Sports" },
+            new Genre { Name = "Strategy" },
+            new Genre { Name = "Thriller" },
+            new Genre { Name = "War" },
+            new Genre { Name = "Western" }
+        };
+
+        var existing = context.Genres.ToList();
+
+        var missing = predefinedGenres
+            .Where(g => !existing.Any(e => e.Name == g.Name))
+            .ToList();
+
+        var extra = existing
+            .Where(e => !predefinedGenres.Any(g => g.Name == e.Name))
+            .ToList();
+
+        if (missing.Any())
+            context.Genres.AddRange(missing);
+
+        if (extra.Any())
+            context.Genres.RemoveRange(extra);
+
+        if (missing.Any() || extra.Any())
+            context.SaveChanges();
     }
 }
