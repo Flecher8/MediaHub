@@ -1,4 +1,8 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using MediaHub.Models.Dtos.GenreDtos;
+using MediaHub.Models.Dtos.MediaContentTypeDtos;
+using MediaHub.Models.Dtos.PictureLinkDtos;
+using MediaHub.Models.Entities;
 
 namespace MediaHub.Models.Dtos.MediaContentDtos;
 
@@ -25,4 +29,10 @@ public class MediaContentDto
     [MaxLength(500, ErrorMessage = "MainPictureLink must not exceed 500 characters.")]
     [Url(ErrorMessage = "MainPictureLink must be a valid URL.")]
     public string? MainPictureLink { get; set; }
+
+    public required MediaContentTypeDto MediaContentType { get; set; }
+
+    public List<GenreDto> Genres { get; set; } = new();
+
+    public List<MediaContentPictureDto> PictureLinks { get; set; } = new();
 }

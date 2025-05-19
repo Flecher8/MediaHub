@@ -49,8 +49,17 @@ public class MediaContentsService : IMediaContentsService
 
     public async Task<MediaContentDto?> GetMediaContentByIdAsync(Guid id)
     {
-        var mediaContent = await _repository.GetByIdAsync(id);
-        return mediaContent == null ? null : _mapper.Map<MediaContentDto>(mediaContent);
+        var items = await _repository.GetFilteredItemsAsync(fb => fb
+            .WithFilter(mc => mc.MediaContentId == id)
+            .Include(mc => mc.Genres)
+            .Include(mc => mc.MediaContentPictures)
+            .Include(mc => mc.MediaContentType)
+        );
+
+        var mediaContent = items.FirstOrDefault();
+        return mediaContent == null
+            ? null
+            : _mapper.Map<MediaContentDto>(mediaContent);
     }
 
     public async Task<List<MediaContentDto>> GetAllMediaContentsAsync()

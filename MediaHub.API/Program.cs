@@ -55,16 +55,22 @@ namespace MediaHub.API
 
             // Services
             builder.Services.AddScoped<IActorsService, ActorsService>();
+            builder.Services.AddScoped<IAnimeService, AnimeService>();
             builder.Services.AddScoped<IAnimeImportService, AnimeImportService>();
             builder.Services.AddScoped<IAnimeStudiosService, AnimeStudiosService>();
             builder.Services.AddScoped<IContentStatusesService, ContentStatusesService>();
             builder.Services.AddScoped<IDirectorsService, DirectorsService>();
+            builder.Services.AddScoped<IFilmService, FilmService>();
             builder.Services.AddScoped<IGameDevelopersService, GameDevelopersService>();
             builder.Services.AddScoped<IGamePlatformsService, GamePlatformsService>();
             builder.Services.AddScoped<IGamePublishersService, GamePublishersService>();
             builder.Services.AddScoped<IGameTagsService, GameTagsService>();
+            builder.Services.AddScoped<IGameService, GameService>();
             builder.Services.AddScoped<IMangaAuthorsService, MangaAuthorsService>();
+            builder.Services.AddScoped<IMediaContentsService, MediaContentsService>();
             builder.Services.AddScoped<IMediaContentTypesService, MediaContentTypesService>();
+            builder.Services.AddScoped<IMangaService, MangaService>();
+            builder.Services.AddScoped<ISerialService, SerialService>();
             builder.Services.AddScoped<IUsersService, UsersService>();
 
             // Import services
