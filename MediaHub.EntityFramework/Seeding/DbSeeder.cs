@@ -9,6 +9,7 @@ public static class DbSeeder
         SeedContentStatuses(context);
         SeedGenres(context);
         SeedCollectionUserRoles(context);
+        SeedEvaluations(context);
         // Add other seeding methods here for additional tables if needed
     }
 
@@ -175,5 +176,26 @@ public static class DbSeeder
 
         if (missing.Any() || extra.Any())
             context.SaveChanges();
+    }
+
+    private static void SeedEvaluations(DataContext context)
+    {
+        // build "None", "1", "2", … "10"
+        var predefined = new List<Evaluation> {
+            new Evaluation { Name = "None" }
+        };
+        predefined.AddRange(Enumerable.Range(1, 10).Select(i => new Evaluation { Name = i.ToString() }));
+
+        var existing = context.Evaluations.ToList();
+        var missing = predefined
+            .Where(pe => !existing.Any(e => e.Name == pe.Name))
+            .ToList();
+        var extra = existing
+            .Where(e => !predefined.Any(pe => pe.Name == e.Name))
+            .ToList();
+
+        if (missing.Any()) context.Evaluations.AddRange(missing);
+        if (extra.Any()) context.Evaluations.RemoveRange(extra);
+        if (missing.Any() || extra.Any()) context.SaveChanges();
     }
 }
