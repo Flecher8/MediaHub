@@ -71,6 +71,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IMediaContentTypesService, MediaContentTypesService>();
             builder.Services.AddScoped<IMangaService, MangaService>();
             builder.Services.AddScoped<ISerialService, SerialService>();
+            builder.Services.AddScoped<IRecommendationCollectionsService, RecommendationCollectionsService>();
             builder.Services.AddScoped<IUsersService, UsersService>();
 
             // Import services

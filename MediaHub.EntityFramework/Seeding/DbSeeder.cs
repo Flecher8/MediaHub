@@ -8,6 +8,7 @@ public static class DbSeeder
         SeedMediaContentTypes(context);
         SeedContentStatuses(context);
         SeedGenres(context);
+        SeedCollectionUserRoles(context);
         // Add other seeding methods here for additional tables if needed
     }
 
@@ -143,6 +144,34 @@ public static class DbSeeder
 
         if (extra.Any())
             context.Genres.RemoveRange(extra);
+
+        if (missing.Any() || extra.Any())
+            context.SaveChanges();
+    }
+
+    private static void SeedCollectionUserRoles(DataContext context)
+    {
+        var predefinedRoles = new List<CollectionUserRole>
+        {
+            new CollectionUserRole { Name = "Editor" },
+            new CollectionUserRole { Name = "Viewer" }
+        };
+
+        var existing = context.CollectionUserRoles.ToList();
+
+        // Add missing roles
+        var missing = predefinedRoles
+            .Where(pr => !existing.Any(er => er.Name == pr.Name))
+            .ToList();
+        if (missing.Any())
+            context.CollectionUserRoles.AddRange(missing);
+
+        // Remove any extra roles
+        var extra = existing
+            .Where(er => !predefinedRoles.Any(pr => pr.Name == er.Name))
+            .ToList();
+        if (extra.Any())
+            context.CollectionUserRoles.RemoveRange(extra);
 
         if (missing.Any() || extra.Any())
             context.SaveChanges();

@@ -40,6 +40,10 @@ public class ExceptionHandlingMiddleware
                 statusCode = StatusCodes.Status400BadRequest;
                 message = exception.Message ?? "Invalid argument.";
                 break;
+            case InvalidOperationException:
+                statusCode = StatusCodes.Status400BadRequest;
+                message = exception.Message ?? "Invalid operation.";
+                break;
             default:
                 statusCode = StatusCodes.Status500InternalServerError;
                 message = "An unexpected error occurred. Please try again later.";
