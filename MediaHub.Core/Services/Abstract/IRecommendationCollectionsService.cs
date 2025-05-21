@@ -13,4 +13,5 @@ public interface IRecommendationCollectionsService
     Task AddUserToCollectionAsync(AddUserToCollectionDto dto);
     Task RemoveUserFromCollectionAsync(Guid collectionId, Guid userId);
     Task<List<RecommendationCollectionDto>> GetUserCollectionsAsync(Guid userId);
+    Task<RecommendationCollectionDto> GetCollectionByIdAsync(Guid collectionId);
 }

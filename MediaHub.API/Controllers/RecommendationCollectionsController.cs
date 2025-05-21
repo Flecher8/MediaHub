@@ -15,6 +15,13 @@ public class RecommendationCollectionsController : ControllerBase
         _service = service;
     }
 
+    [HttpGet("{id:guid}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var dto = await _service.GetCollectionByIdAsync(id);
+        return Ok(dto);
+    }
+
     [HttpPost]
     public async Task<IActionResult> Create([FromBody] CreateRecommendationCollectionDto dto)
     {

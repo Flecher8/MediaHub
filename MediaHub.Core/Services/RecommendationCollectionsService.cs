@@ -207,4 +207,35 @@ public class RecommendationCollectionsService : IRecommendationCollectionsServic
         return result;
     }
 
+    public async Task<RecommendationCollectionDto> GetCollectionByIdAsync(Guid collectionId)
+    {
+        // load the collection
+        var col = await _collectionsRepo.GetByIdAsync(collectionId);
+        if (col == null)
+            throw new KeyNotFoundException("Collection not found.");
+
+        // load the creator user
+        var creator = (await _userRepo.GetFilteredItemsAsync(fb =>
+            fb.WithFilter(u => u.Id == col.CreatorUserId)))
+            .First();
+
+        // load all accesses for this collection, including user & role
+        var accessEntities = await _accessRepo.GetFilteredItemsAsync(fb =>
+        {
+            fb.WithFilter(a => a.RecommendationCollectionId == collectionId)
+              .Include(a => a.User)
+              .Include(a => a.CollectionUserRole);
+        });
+
+        // project into DTO
+        return new RecommendationCollectionDto
+        {
+            CollectionId = col.CollectionId,
+            Name = col.Name,
+            Creator = _mapper.Map<UserDto>(creator),
+            RecommendationCollectionUserAccesses = accessEntities
+                .Select(a => _mapper.Map<RecommendationCollectionUserAccessDto>(a))
+                .ToList()
+        };
+    }
 }

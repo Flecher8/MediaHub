@@ -69,6 +69,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IMangaAuthorsService, MangaAuthorsService>();
             builder.Services.AddScoped<IMediaContentsService, MediaContentsService>();
             builder.Services.AddScoped<IMediaContentTypesService, MediaContentTypesService>();
+            builder.Services.AddScoped<IMediaInteractionStatusService, MediaInteractionStatusService>();
             builder.Services.AddScoped<IMangaService, MangaService>();
             builder.Services.AddScoped<ISerialService, SerialService>();
             builder.Services.AddScoped<IRecommendationCollectionsService, RecommendationCollectionsService>();

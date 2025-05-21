@@ -5,6 +5,7 @@ using MediaHub.Models.Dtos.AnimeStudioDtos;
 using MediaHub.Models.Dtos.CollectionUserRoleDtos;
 using MediaHub.Models.Dtos.ContentStatusDtos;
 using MediaHub.Models.Dtos.DirectorDtos;
+using MediaHub.Models.Dtos.EvaluationDtos;
 using MediaHub.Models.Dtos.FilmDtos;
 using MediaHub.Models.Dtos.GameDeveloperDtos;
 using MediaHub.Models.Dtos.GameDtos;
@@ -16,6 +17,7 @@ using MediaHub.Models.Dtos.MangaAuthorDtos;
 using MediaHub.Models.Dtos.MangaDtos;
 using MediaHub.Models.Dtos.MediaContentDtos;
 using MediaHub.Models.Dtos.MediaContentTypeDtos;
+using MediaHub.Models.Dtos.MediaInteractionStatusDtos;
 using MediaHub.Models.Dtos.MovieInfoDtos;
 using MediaHub.Models.Dtos.PictureLinkDtos;
 using MediaHub.Models.Dtos.RecommendationCollectionDtos;
@@ -147,6 +149,17 @@ namespace MediaHub.Core.Mapping
             CreateMap<RecommendationCollectionUserAccess, RecommendationCollectionUserAccessDto>()
                 .ForMember(d => d.User, o => o.MapFrom(src => src.User))
                 .ForMember(d => d.Role, o => o.MapFrom(src => src.CollectionUserRole));
+
+            // Evaluation mappings
+            CreateMap<Evaluation, EvaluationDto>();
+
+            // MediaInteractionStatus mappings
+            CreateMap<MediaInteractionStatus, MediaInteractionStatusDto>()
+                .ForMember(d => d.MediaContent, o => o.MapFrom(src => src.MediaContent))
+                .ForMember(d => d.ContentStatus, o => o.MapFrom(src => src.ContentStatus))
+                .ForMember(d => d.Evaluation, o => o.MapFrom(src => src.Evaluation))
+                .ForMember(d => d.RecommendationCollection,
+                            o => o.MapFrom(src => src.RecommendationCollection));
         }
     }
 }
