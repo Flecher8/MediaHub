@@ -61,4 +61,12 @@ public class MediaInteractionStatusesController : ControllerBase
         await _service.DeleteByCollectionAndMediaAsync(collectionId, mediaContentId);
         return NoContent();
     }
+
+    [HttpGet("collection/{collectionId:guid}/media/{mediaContentId:guid}")]
+    public async Task<IActionResult> GetByCollectionAndMedia(Guid collectionId, Guid mediaContentId)
+    {
+        var dto = await _service.GetByCollectionAndMediaAsync(collectionId, mediaContentId);
+        if (dto == null) return NotFound();
+        return Ok(dto);
+    }
 }

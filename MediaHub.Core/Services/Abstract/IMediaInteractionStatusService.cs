@@ -15,4 +15,5 @@ public interface IMediaInteractionStatusService
     Task<MediaInteractionStatusDto?> GetByIdAsync(Guid id);
     Task<List<MediaContentDto>> GetMediaByCollectionAsync(Guid recommendationCollectionId);
     Task DeleteByCollectionAndMediaAsync(Guid recommendationCollectionId, Guid mediaContentId);
+    Task<MediaInteractionStatusDto?> GetByCollectionAndMediaAsync(Guid recommendationCollectionId, Guid mediaContentId);
 }

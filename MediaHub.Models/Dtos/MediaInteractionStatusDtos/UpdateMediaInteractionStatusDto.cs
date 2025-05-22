@@ -8,13 +8,7 @@ using System.Threading.Tasks;
 namespace MediaHub.Models.Dtos.MediaInteractionStatusDtos;
 public class UpdateMediaInteractionStatusDto
 {
-    [Required]
     public Guid MediaInteractionStatusId { get; set; }
-
-    [Required]
     public Guid ContentStatusId { get; set; }
-
-    [Required]
     public Guid EvaluationId { get; set; }
-
 }

@@ -148,4 +148,23 @@ public class MediaInteractionStatusService : IMediaInteractionStatusService
 
         await _misRepo.DeleteAsync(mis.MediaInteractionStatusId);
     }
+
+    public async Task<MediaInteractionStatusDto?> GetByCollectionAndMediaAsync(Guid recommendationCollectionId, Guid mediaContentId)
+    {
+        // load the single MIS entry (if any), with all navigations
+        var list = await _misRepo.GetFilteredItemsAsync(fb => fb
+            .WithFilter(mis =>
+                mis.RecommendationCollectionId == recommendationCollectionId &&
+                mis.MediaContentId == mediaContentId)
+            .Include(mis => mis.MediaContent)
+            .Include(mis => mis.ContentStatus)
+            .Include(mis => mis.Evaluation)
+            .Include(mis => mis.RecommendationCollection)
+        );
+
+        var mis = list.FirstOrDefault();
+        return mis == null
+            ? null
+            : _mapper.Map<MediaInteractionStatusDto>(mis);
+    }
 }
