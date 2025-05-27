@@ -1,4 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.Filters;
 using MediaHub.EntityFramework;
@@ -73,6 +74,7 @@ namespace MediaHub.API
             builder.Services.AddScoped<IMediaInteractionStatusService, MediaInteractionStatusService>();
             builder.Services.AddScoped<IMangaService, MangaService>();
             builder.Services.AddScoped<ISerialService, SerialService>();
+            builder.Services.AddScoped<IRecommendationsService, RecommendationsService>();
             builder.Services.AddScoped<IRecommendationCollectionsService, RecommendationCollectionsService>();
             builder.Services.AddScoped<IUsersService, UsersService>();
 
@@ -118,7 +120,14 @@ namespace MediaHub.API
             //});
             builder.Services.AddDbContext<DataContext>(options =>
             {
-                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly("MediaHub.EntityFramework"));
+                options.UseSqlServer(
+                     builder.Configuration.GetConnectionString("DefaultConnection"),
+                     sqlServerOptions =>
+                     {
+                         sqlServerOptions.MigrationsAssembly("MediaHub.EntityFramework");
+                         sqlServerOptions.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                     }
+                 );
             });
 
             // Enable CORS

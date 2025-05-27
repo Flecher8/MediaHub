@@ -73,4 +73,14 @@ public class MediaContentsController : ControllerBase
 
         return Ok(mediaContent);
     }
+
+    [HttpGet("search")]
+    public async Task<IActionResult> SearchByTitle([FromQuery(Name = "query")] string query)
+    {
+        if (string.IsNullOrWhiteSpace(query))
+            return BadRequest(new { Error = "query parameter is required." });
+
+        var results = await _service.SearchMediaContentsByTitleAsync(query);
+        return Ok(results);
+    }
 }

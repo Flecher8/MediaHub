@@ -18,6 +18,8 @@ public class RecommendationCollectionsService : IRecommendationCollectionsServic
     private readonly IUserRepository _userRepo;
     private readonly ICollectionUserRoleRepository _roleRepo;
     private readonly IRecommendationCollectionUserAccessRepository _accessRepo;
+    private readonly IGenreRepository _genreRepo;
+    private readonly IGenreEvaluationRepository _genreEvalRepo;
     private readonly IMapper _mapper;
 
     public RecommendationCollectionsService(
@@ -25,12 +27,16 @@ public class RecommendationCollectionsService : IRecommendationCollectionsServic
         IUserRepository userRepo,
         ICollectionUserRoleRepository roleRepo,
         IRecommendationCollectionUserAccessRepository accessRepo,
+        IGenreRepository genreRepo,
+        IGenreEvaluationRepository genreEvalRepo,
         IMapper mapper)
     {
         _collectionsRepo = collectionsRepo;
         _userRepo = userRepo;
         _roleRepo = roleRepo;
         _accessRepo = accessRepo;
+        _genreRepo = genreRepo;
+        _genreEvalRepo = genreEvalRepo;
         _mapper = mapper;
     }
 
@@ -47,6 +53,18 @@ public class RecommendationCollectionsService : IRecommendationCollectionsServic
             Name = dto.Name
         };
         await _collectionsRepo.AddAsync(entity);
+
+        // seed genre‐evaluations at zero
+        var allGenres = await _genreRepo.GetAllAsync();
+        foreach (var genre in allGenres)
+        {
+            await _genreEvalRepo.AddAsync(new GenreEvaluation
+            {
+                RecommendationCollectionId = entity.CollectionId,
+                GenreId = genre.GenreId,
+                Points = 0
+            });
+        }
 
         var userEntity = (await _userRepo
              .GetFilteredItemsAsync(fb => fb.WithFilter(u => u.Id == dto.CreatorUserId)))
@@ -72,13 +90,19 @@ public class RecommendationCollectionsService : IRecommendationCollectionsServic
         if (userCols.Count <= 1 && userCols.Any(c => c.CollectionId == collectionId))
             throw new InvalidOperationException("Cannot delete your last remaining collection.");
 
-        // remove all access rows first
+        // delete all RecommendationCollectionUserAccess
         var accesses = await _accessRepo.GetFilteredItemsAsync(fb =>
             fb.WithFilter(a => a.RecommendationCollectionId == collectionId));
         foreach (var a in accesses)
             await _accessRepo.DeleteAsync(a.UserAccessId);
 
-        // then delete the collection
+        // delete all GenreEvaluation
+        var ges = await _genreEvalRepo.GetFilteredItemsAsync(fb =>
+            fb.WithFilter(ge => ge.RecommendationCollectionId == collectionId));
+        foreach (var ge in ges)
+            await _genreEvalRepo.DeleteAsync(ge.GenreEvaluationId);
+
+        // finally delete the collection
         await _collectionsRepo.DeleteAsync(collectionId);
     }
 

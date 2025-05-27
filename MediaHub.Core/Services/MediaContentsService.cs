@@ -73,4 +73,18 @@ public class MediaContentsService : IMediaContentsService
         var mediaContents = await _repository.GetFilteredItemsAsync(m => m.Title == title);
         return mediaContents.FirstOrDefault() == null ? null : _mapper.Map<MediaContentDto>(mediaContents.First());
     }
+
+    public async Task<List<MediaContentDto>> SearchMediaContentsByTitleAsync(string searchTerm)
+    {
+        // load any whose Title contains the searchTerm (case depends on your DB collation)
+        var items = await _repository.GetFilteredItemsAsync(fb => fb
+            .WithFilter(mc => mc.Title.Contains(searchTerm))
+            // eager-load navs that your DTO expects:
+            .Include(mc => mc.Genres)
+            .Include(mc => mc.MediaContentPictures)
+            .Include(mc => mc.MediaContentType)
+        );
+
+        return _mapper.Map<List<MediaContentDto>>(items);
+    }
 }

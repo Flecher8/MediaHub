@@ -9,4 +9,5 @@ public interface IMediaContentsService
     Task<MediaContentDto?> GetMediaContentByIdAsync(Guid id);
     Task<List<MediaContentDto>> GetAllMediaContentsAsync();
     Task<MediaContentDto?> GetMediaContentByTitleAsync(string title);
+    Task<List<MediaContentDto>> SearchMediaContentsByTitleAsync(string searchTerm);
 }
